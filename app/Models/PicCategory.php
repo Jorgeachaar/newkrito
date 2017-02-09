@@ -20,6 +20,11 @@ class PicCategory extends Model
     	return $this->belongsTo(PicCategory::class, 'pic_category_id');
     }
 
+    public function images()
+    {
+        return $this->hasMany(PicCategory::class, 'pic_category_id');
+    }
+
     public function setPremiunAttribute($value)
     {
         $this->attributes['premiun'] = $value ? true : false;
