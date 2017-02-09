@@ -4,16 +4,17 @@
 	<link rel="stylesheet" href="{{ asset('plugins/adminlte/plugins/iCheck/all.css') }}">
 @endsection
 
+@if (isset($item))
+	@section('title_page_header', 'Editar la categoria: ' .$item->description)
+@else
+	@section('title_page_header', 'Nueva categoria');
+@endif
+
+{{-- @section('description_page_header', 'panel de administración') --}}
+
 @section('content')
 
 	<div class="box box-primary">
-		<div class="box-header with-border">
-			@if (isset($item))
-				<h3 class="box-title">Editar la categoria: {{ $item->description }}</h3>
-			@else
-				<h3 class="box-title">Nueva categoria</h3>
-			@endif
-		</div>
 		@if (isset($item))
 			{!! Form::model($item, ['method' => 'PUT', 'route' => ['picCategories.update', $item->id], 'enctype'=>'multipart/form-data']) !!}
 		@else
@@ -28,19 +29,19 @@
 				{!! Form::hidden('premiun', false) !!}
 				{!! Form::checkbox('premiun', true) !!} Es premiun
 				<br><br>
-				{!! Field::file('image'); !!}
 				@if (isset($item))
 					<img src="{{ $item->url_thumbnail_image }}" alt="">
 				@endif
-				{!! Field::file('image2'); !!}
+				{!! Field::file('image'); !!}
 				@if (isset($item))
 					<img src="{{ $item->url_thumbnail_image2 }}" alt="">
 				@endif
+				{!! Field::file('image2'); !!}
 			</div>
 
 			<div class="box-footer">
 				<button type="submit" class="btn btn-primary">Aceptar</button>
-				<a href="{{	URL::previous() }}" class="btn btn-primary">Cancelar</a>
+				<a href="{{	URL::previous() }}" class="btn btn-warning  ">Cancelar</a>
 			</div>
 	 	{!! Form::close() !!}
 	</div>

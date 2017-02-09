@@ -106,4 +106,9 @@ class PicCategoryController extends Controller
         return $categories;
     }
 
+    public function listImage(PicCategory $category)
+    {
+        return view('admin.PicCategories.listImage', compact('category'));
+    }
+
 }

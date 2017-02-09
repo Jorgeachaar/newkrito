@@ -2,7 +2,7 @@
 
 @section('title_page_header', 'Categorias')
 
-@section('description_page_header', 'lista de categpria de imágenes')
+@section('description_page_header', 'lista de categoría')
 
 @section('content')
 
@@ -39,10 +39,10 @@
                   <td><img src="{{ $item->url_thumbnail_image2 }}" alt=""></td>
                   <td>{{ $item->premiun }}</td>
                   <td>
-                    <a href="{{ route('picCategories.edit', $item->id) }}" class="btn btn-warning"><i class="fa fa-refresh"></i> update</a>
+                    <a href="{{ route('picCategories.edit', $item->id) }}" class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> update</a>
                     <a 
                       href="{{ route('picCategories.destroy', $item->id) }}" 
-                      class="btn btn-danger"
+                      class="btn btn-danger btn-sm pull-left"
                       onclick="event.preventDefault();
                                 if (confirm('Esta seguro de eliminar la categoria {{ $item->description }}?')) {
                                   document.getElementById('destroy-form-{{ $item->id }}').submit();
@@ -55,6 +55,7 @@
                     {{ Form::open(array('route' => array('picCategories.destroy', $item->id), 'method' => 'delete', 'id'=>'destroy-form-'. $item->id)) }}                       
                     {{ Form::close() }}
                     
+                    <a href="{{ route('picCategories.images', $item->id) }}" class="btn btn-success btn-sm pull-left"><i class="fa fa-picture-o"></i> IMG</a>
                   </td>
                 </tr>  
                 @endforeach
