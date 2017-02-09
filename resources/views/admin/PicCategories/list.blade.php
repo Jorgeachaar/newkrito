@@ -20,6 +20,7 @@
                   <th>Título</th>
                   <th>Categoria</th>
                   <th>Image</th>
+                  <th>Image2</th>
                   <th>Premiun</th>
                   <th>Options</th>                  
                 </tr>
@@ -29,13 +30,13 @@
                 <tr>
                   <td>{{ $item->id }}</td>
                   <td>{{ $item->title }}</td>
-                  {{-- <td><img src="{{ $item->url_thumbnail_image }}" alt="" style="width: 80px"></td> --}}
                   @if ($item->pic_category_id)
                     <td>{{ $item->category->title }}</td>
                   @else
                     <td>--</td>
                   @endif
-                  <td>{{ $item->image }}</td>
+                  <td><img src="{{ $item->url_thumbnail_image }}" alt=""></td>
+                  <td><img src="{{ $item->url_thumbnail_image2 }}" alt=""></td>
                   <td>{{ $item->premiun }}</td>
                   <td>
                     <a href="{{ route('picCategories.edit', $item->id) }}" class="btn btn-warning"><i class="fa fa-refresh"></i> update</a>

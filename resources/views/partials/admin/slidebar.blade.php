@@ -30,7 +30,7 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">KRITO</li>
+        <li class="header">PICS</li>
         {{-- <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li> --}}
         <li class="treeview">
           <a href="#" class="{{ isActiveToArray(['picCategories.index']) }}"><i class="fa fa-link"></i> <span>Multilevel</span>

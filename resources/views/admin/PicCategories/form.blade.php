@@ -1,5 +1,9 @@
 @extends('layouts.admin.base')
 
+@section('css')
+	<link rel="stylesheet" href="{{ asset('plugins/adminlte/plugins/iCheck/all.css') }}">
+@endsection
+
 @section('content')
 
 	<div class="box box-primary">
@@ -18,23 +22,40 @@
 			<div class="box-body">
 	 			{!! Field::text('title') !!}				
 	 			{!! Field::text('description') !!}				
-				{!! Form::label('Categorias:') !!}				
+				{!! Form::label('Categorias:') !!}
 				{!! Form::select('pic_category_id', $categories, null, ['class' => 'form-control'])!!}
-				{{-- {!! Form::checkboxes('premiun', [true => 'Es premiun']) !!} --}}
 				<br>
 				{!! Form::hidden('premiun', false) !!}
 				{!! Form::checkbox('premiun', true) !!} Es premiun
-			</div>
-			{{-- <div class="box-body">
+				<br><br>
 				{!! Field::file('image'); !!}
 				@if (isset($item))
-					<img src="{{ $tattoo->url_thumbnail_image }}" alt="">
+					<img src="{{ $item->url_thumbnail_image }}" alt="">
 				@endif
-			</div> --}}
+				{!! Field::file('image2'); !!}
+				@if (isset($item))
+					<img src="{{ $item->url_thumbnail_image2 }}" alt="">
+				@endif
+			</div>
+
 			<div class="box-footer">
 				<button type="submit" class="btn btn-primary">Aceptar</button>
 				<a href="{{	URL::previous() }}" class="btn btn-primary">Cancelar</a>
 			</div>
 	 	{!! Form::close() !!}
 	</div>
+@endsection
+
+@section('js')
+	<script src="{{ asset('plugins/adminlte/plugins/iCheck/icheck.min.js') }}"></script>
+
+	<script type="text/javascript">
+		
+		$(document).ready(function() {
+			$('input[type="checkbox"], input[type="radio"].minimal').iCheck({
+		      checkboxClass: 'icheckbox_minimal-blue',
+		      radioClass: 'iradio_minimal-blue'
+		    });
+		});	
+	</script>
 @endsection
