@@ -12,8 +12,18 @@ class PicCategoryImage extends Model
 		'pic_category_id'
 	];
 
-    public function category()
+    // public function category()
+    // {
+    // 	return $this->belongsTo(PicCategory::class, 'pic_category_id');
+    // }
+
+    public function getUrlThumbnailImageAttribute()
     {
-    	return $this->belongsTo(PicCategory::class, 'pic_category_id');
+        return asset('storage/pic/images/thumbnail/' . $this->image);
+    }
+
+    public function getUrlImageAttribute()
+    {
+        return asset('storage/' . $this->image);
     }
 }

@@ -110,12 +110,14 @@ class PicCategoryController extends Controller
 
     public function listImage(PicCategory $category)
     {
-        dd($category->images()->count());
         return view('admin.PicCategories.listImage', compact('category'));
     }
 
     public function storeImage(Request $request)
     {
+        $maxPosition = PicCategoryImage::max('position');
+        $maxPosition = $maxPosition ? $maxPosition : 0;
+
         $this->validate($request,  [
             'pic_category_id' => 'required|exists:pic_categories,id',
             'image.*' => 'image|mimes:jpg,jpeg,png,bmp|max:20000'
@@ -131,10 +133,12 @@ class PicCategoryController extends Controller
                 $pic_image = new PicCategoryImage;
 
                 $pic_image->fill($request->all());
+                $pic_image->position = $maxPosition;
+                $maxPosition++;
 
                 $pic_image->description = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
 
-                $pic_image->image = $image->store('images', 'public');
+                $pic_image->image = $image->store('pic/images', 'public');
                 
                 $img = Image::make($image);
                 
@@ -142,7 +146,7 @@ class PicCategoryController extends Controller
                     $constraint->aspectRatio();
                 });
 
-                Storage::disk('public')->put('thumbnail/' . $pic_image->image, (string) $img->encode());
+                Storage::disk('public')->put('pic/images/thumbnail/' . $pic_image->image, (string) $img->encode());
 
                 $pic_image->save();
 

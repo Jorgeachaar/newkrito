@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\PicCategory;
+use App\Models\PicCategoryImage;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ class RouteServiceProvider extends ServiceProvider
 
         parent::boot();
         
+        Route::model('picCategoryImage', PicCategoryImage::class);
         Route::model('picCategory', PicCategory::class);
     }
 

@@ -22,7 +22,7 @@ class PicCategory extends Model
 
     public function images()
     {
-        return $this->hasMany(PicCategory::class, 'pic_category_id');
+        return $this->hasMany(PicCategoryImage::class, 'pic_category_id')->orderBy('position', 'ASC');
     }
 
     public function setPremiunAttribute($value)
