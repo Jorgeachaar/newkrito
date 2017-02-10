@@ -17,7 +17,16 @@
                     <div class="col-lg-12 text-center">
                         <h1 class="section-heading">{{$picCategory->title}}</h1>
                     </div>
+                        
+                    <h1>Categorias</h1>
+                    @foreach ($picCategory->categories() as $element)
+                        <p>{{ $element->title }}</p>
+                    @endforeach
 
+                    <h1>Imagenes</h1>
+                    @foreach ($picCategory->images as $element)
+                        <p>{{ $element->image }}</p>
+                    @endforeach
                     {{-- @foreach ($picCategory->albums()->orderBy('position', 'ASC')->get() as $item)
 						<div class="col-lg-4 col-sm-6 text-center ">
 	                            <a href="{{url('/images/'. $item->id)}}">

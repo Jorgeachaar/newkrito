@@ -21,6 +21,11 @@ class PicCategory extends Model
     	return $this->belongsTo(PicCategory::class, 'pic_category_id');
     }
 
+    public function categories()
+    {
+        return PicCategory::where('pic_category_id', $this->id)->get();
+    }
+
     public function images()
     {
         return $this->hasMany(PicCategoryImage::class, 'pic_category_id')
