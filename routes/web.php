@@ -1,16 +1,9 @@
 <?php
 
-use App\Models\PicCategory;
-use App\Models\Setting;
+Route::name('index')->get('/', 'HomeController@index');
+Route::name('contact')->post('/', 'HomeController@sendContact');
 
-Route::get('/', function () {
-
-	$mainCategories = PicCategory::getMainCategory();
-	$settings = Setting::getSetting();
-
-    return view('index', compact('settings', 'mainCategories'));
-    // return view('welcome');
-});
+Route::name('pic.category')->get('/pics/{picCategory}-{slug}','PicController@show');
 
 Auth::routes();
 

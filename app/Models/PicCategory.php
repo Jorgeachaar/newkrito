@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class PicCategory extends Model
@@ -35,6 +36,17 @@ class PicCategory extends Model
     public function setPremiumAttribute($value)
     {
         $this->attributes['premium'] = $value ? true : false;
+    }
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('pic.category', [$this->id, $this->slug]);
     }
 
     public function setImageAttribute($value)

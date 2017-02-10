@@ -43,7 +43,7 @@
 
                 @foreach ($mainCategories as $category)
                     <div class="col-lg-4 col-sm-6 text-center ">
-                    <a href="{{ url('/pics/4') }}">
+                    <a href="{{ route('pic.category', [$category, $category->slug]) }}">
                         <div id="f1_container">
                         <div id="f1_card" class="shadow">
                           <div class="front face">
@@ -95,7 +95,7 @@
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-            {{-- {!! Form::open(array('action' => 'HomeController@sendMail', 'method' => 'POST', 'id'=>'FormContacto'))!!} --}}
+            {!! Form::open(['method' => 'POST', 'route' => 'contact', 'id'=>'FormContacto']) !!}
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -119,7 +119,7 @@
                         <button type="submit" class="btn btn-xl">Send Message</button>
                     </div>
                 </div>
-            {{-- {!! Form::close() !!} --}}
+            {!! Form::close() !!}
             </div>
         </div>
     </div>

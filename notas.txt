@@ -1,7 +1,10 @@
+Eliminar las imagenes o actualizarlas que se eliminen del storage
 Cuando se sube las multi imagenes que muertre si hubo un error
 Usar explociones para ver las categorias(hacer cadena de links)
 Usar el namespace para los controllers
-
+From para los email como configurarlo
+Poder configurar el setting
+Pagina de errores customizar
 
 LINKS
 
