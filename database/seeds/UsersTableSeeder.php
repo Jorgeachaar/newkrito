@@ -8,6 +8,6 @@ class UsersTableSeeder extends Seeder
 
     public function run()
     {
-        factory(User::class)->create(['email' => 'jorgeachaar@hotmail.com']);
+        factory(User::class)->create(['email' => 'jorgeachaar@hotmail.com', 'role' => 'admin']);
     }
 }

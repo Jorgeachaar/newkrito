@@ -20,7 +20,8 @@ class CreatePicCategoriesTable extends Migration
             $table->string('description');
             $table->string('image');
             $table->string('image2');
-            $table->boolean('premiun');
+            $table->boolean('premium');
+            $table->integer('position');
             $table->unsignedInteger('pic_category_id')->nullable();
             $table->foreign('pic_category_id')->references('id')->on('pic_categories');
             $table->timestamps();

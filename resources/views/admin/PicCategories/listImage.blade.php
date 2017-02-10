@@ -27,7 +27,7 @@
             <div class="caption">
             {{ Form::model($image, array('route' => array('picCategoryImages.update', $image->id), 'method' => 'PUT')) }}
                 {!! Field::number('position') !!}
-                <button type="submit" class="btn btn-primary">Aceptar</button>
+                <button type="submit" class="btn btn-primary">Refrescar</button>
             {{ Form::close() }}
               <p><a 
                   href="{{ route('picCategoryImages.destroy', $image->id) }}" 

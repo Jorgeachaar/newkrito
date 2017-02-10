@@ -26,8 +26,11 @@
 				{!! Form::label('Categorias:') !!}
 				{!! Form::select('pic_category_id', $categories, null, ['class' => 'form-control'])!!}
 				<br>
-				{!! Form::hidden('premiun', false) !!}
-				{!! Form::checkbox('premiun', true) !!} Es premiun
+				{!! Form::hidden('premium', false) !!}
+				{!! Form::checkbox('premium', true) !!} Es premium
+				@if (isset($item))
+					{!! Field::number('position') !!}
+				@endif
 				<br><br>
 				@if (isset($item))
 					<img src="{{ $item->url_thumbnail_image }}" alt="">

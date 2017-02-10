@@ -12,7 +12,7 @@ class PicCategory extends Model
     	'title',
     	'description',
     	'pic_category_id',
-    	'premiun',
+    	'premium',
     ];
 
     public function category()
@@ -22,12 +22,14 @@ class PicCategory extends Model
 
     public function images()
     {
-        return $this->hasMany(PicCategoryImage::class, 'pic_category_id')->orderBy('position', 'ASC');
+        return $this->hasMany(PicCategoryImage::class, 'pic_category_id')
+            ->orderBy('position', 'ASC')
+            ->orderBy('created_at', 'ASC');
     }
 
-    public function setPremiunAttribute($value)
+    public function setPremiumAttribute($value)
     {
-        $this->attributes['premiun'] = $value ? true : false;
+        $this->attributes['premium'] = $value ? true : false;
     }
 
     public function setImageAttribute($value)

@@ -1,0 +1,3 @@
+Cuando se sube las multi imagenes que muertre si hubo un error
+Usar explociones para ver las categorias(hacer cadena de links)
+Usar el namespace para los controllers

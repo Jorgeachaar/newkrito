@@ -14,7 +14,7 @@ class PicCategoryController extends Controller
 
     public function index()
     {
-        $list = PicCategory::all();
+        $list = PicCategory::orderBy('position', 'ASC')->get();
         return view('admin.PicCategories.list', compact('list'));
     }
 
@@ -38,6 +38,9 @@ class PicCategoryController extends Controller
         if ($request->file('image2'))
             $category->image2 = $request->file('image2')->store('pic/category', 'public');
 
+        $maxPosition = PicCategory::max('position');
+        $category->position = $maxPosition ? ++$maxPosition : 1;
+
         $category->save();
 
         return $this->urlList();
@@ -60,9 +63,12 @@ class PicCategoryController extends Controller
             'description' => 'required|min:3',
             'title' => 'required|min:3',
             'pic_categories_id' => 'nullable|exists:pic_categories,id',
+            'position' => 'required|integer',
         ]);
 
         $category->fill($request->all());
+
+        $category->position = $request->input('position');
 
         $category->save();
 
@@ -116,7 +122,7 @@ class PicCategoryController extends Controller
     public function storeImage(Request $request)
     {
         $maxPosition = PicCategoryImage::max('position');
-        $maxPosition = $maxPosition ? $maxPosition : 0;
+        $maxPosition = $maxPosition ? ++$maxPosition : 1;
 
         $this->validate($request,  [
             'pic_category_id' => 'required|exists:pic_categories,id',
@@ -133,8 +139,7 @@ class PicCategoryController extends Controller
                 $pic_image = new PicCategoryImage;
 
                 $pic_image->fill($request->all());
-                $pic_image->position = $maxPosition;
-                $maxPosition++;
+                $pic_image->position = $maxPosition++;
 
                 $pic_image->description = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
 

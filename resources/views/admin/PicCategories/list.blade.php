@@ -16,19 +16,19 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Code</th>
+                  <th>Posición</th>
                   <th>Título</th>
                   <th>Categoria</th>
                   <th>Image</th>
                   <th>Image2</th>
-                  <th>Premiun</th>
+                  <th>Premium</th>
                   <th>Options</th>                  
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($list as $item)
                 <tr>
-                  <td>{{ $item->id }}</td>
+                  <td>{{ $item->position }}</td>
                   <td>{{ $item->title }}</td>
                   @if ($item->pic_category_id)
                     <td>{{ $item->category->title }}</td>
@@ -37,7 +37,7 @@
                   @endif
                   <td><img src="{{ $item->url_thumbnail_image }}" alt=""></td>
                   <td><img src="{{ $item->url_thumbnail_image2 }}" alt=""></td>
-                  <td>{{ $item->premiun }}</td>
+                  <td>{{ $item->premium }}</td>
                   <td>
                     <a href="{{ route('picCategories.edit', $item->id) }}" class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> update</a>
                     <a 
@@ -62,10 +62,12 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Code</th>
-                  <th>Description</th>
-                  <th>Image</th>
+                  <th>Posición</th>
+                  <th>Título</th>
                   <th>Categoria</th>
+                  <th>Image</th>
+                  <th>Image2</th>
+                  <th>Premium</th>
                   <th>Options</th> 
                 </tr>
                 </tfoot>
