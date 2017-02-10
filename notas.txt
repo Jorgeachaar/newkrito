@@ -1,3 +1,9 @@
 Cuando se sube las multi imagenes que muertre si hubo un error
 Usar explociones para ver las categorias(hacer cadena de links)
 Usar el namespace para los controllers
+
+
+LINKS
+
+https://styde.net/ckeditor-en-laravel-5/
+https://www.youtube.com/watch?v=k5zi0Rky1fA&list=PLraIUviMMM3e_manR8pmKmU6NfTryIfI_&index=24
