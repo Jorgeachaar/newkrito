@@ -41,81 +41,24 @@
                     <h2 class="section-subheading text-muted">You`ll find here previews of my newst sets.</h2>
                 </div>
 
-                <div class="col-lg-4 col-sm-6 text-center ">
+                @foreach ($mainCategories as $category)
+                    <div class="col-lg-4 col-sm-6 text-center ">
                     <a href="{{ url('/pics/4') }}">
                         <div id="f1_container">
                         <div id="f1_card" class="shadow">
                           <div class="front face">
-                            <img src="img/book/exxxo2.png">
+                            <img src="{{ $category->url_thumbnail_image }}">
                           </div>
                           <div class="back face">
-                            <img src="img/book/exxxo1.png">
+                            <img src="{{ $category->url_thumbnail_image2 }}">
                           </div>
                         </div>
                         <div class="clearfix"></div>
                         </div>
-                        <h3>Bs Aires eXXXotica
-                            {{-- <small>More...</small> --}}
-                        </h3>
+                        <h3>{{ $category->title }}</h3>
                     </a>
-                </div>
-
-                <div class="col-lg-4 col-sm-6 text-center ">
-                    <a href="{{ url('/pics/2') }}">
-                        <div id="f1_container">
-                        <div id="f1_card" class="shadow">
-                          <div class="front face">
-                            <img src="img/book/Sets1.png">
-                          </div>
-                          <div class="back face">
-                            <img src="img/book/Sets2.png">
-                          </div>
-                        </div>
-                        <div class="clearfix"></div>
-                        </div>
-                        <h3>Sets
-                            {{-- <small>More...</small> --}}
-                        </h3>
-                    </a>
-                </div>
-                
-                <div class="col-lg-4 col-sm-6 text-center ">
-                        <a href="{{ url('/pics/1') }}">
-                                <div id="f1_container">
-                                <div id="f1_card" class="shadow">
-                                  <div class="front face">
-                                    <img src="img/book/books1.png">
-                                    {{-- <img class="img-circle img-center prueba" src="img/book/1.jpg"/> --}}
-                                  </div>
-                                  <div class="back face">
-                                    <img src="img/book/books2.png">
-                                    {{-- <img class="img-circle img-center prueba" src="img/book/1.jpg"/> --}}
-                                  </div>
-                                </div>
-                                </div>
-                        </a>
-                                        <h3>Book
-                        {{-- <small>More...</small> --}}
-                    </h3>
-                </div>
-
-                <div class="col-lg-4 col-sm-6 text-center ">
-                    <a href="{{ url('/pics/3') }}">
-                        <div id="f1_container">
-                        <div id="f1_card" class="shadow">
-                          <div class="front face">
-                            <img src="img/book/tattoos1.png">
-                          </div>
-                          <div class="back face">
-                            <img src="img/book/tattoos2.png">
-                          </div>
-                        </div>
-                        </div>
-                    </a>
-                    <h3>Tatto
-                        {{-- <small>More...</small> --}}
-                    </h3>
-                </div>
+                    </div>
+                @endforeach
 
             </div>
         </div>
@@ -132,7 +75,7 @@
                     <h2 class="section-heading">About Me</h2>
                     <br><br>
                     <div class="col-lg-5">
-                        <p class="text-center"><img id="imgabout" class="img-center" src="img/logo.png" alt=""></p>
+                        <p class="text-center"><img id="imgabout" class="img-center" src="krito/img/logo.png" alt=""></p>
                     </div>
                     <div id="abouttext" class="col-lg-7">
                         <p>{{ $settings->about }}</p>

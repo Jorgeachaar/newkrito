@@ -12,14 +12,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content="">
 		<meta name="author" content="">
-        <link href='{{ asset("img/favicon.png") }}' rel='shortcut icon' type='image/png'>
+        <link href='{{ asset("krito/img/favicon.png") }}' rel='shortcut icon' type='image/png'>
         <!-- FONTS -->
         <link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
 
         <title>Krito</title>
-        <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-        <link href="{{ asset('/css/grayscale.css') }}" rel="stylesheet">
-		<link href="{{ asset('/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('krito/css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('krito/css/grayscale.css') }}" rel="stylesheet">
+		<link href="{{ asset('krito/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
         
 		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -126,14 +126,15 @@ if (Auth::check()) $classcheck ="";
                                 <li><a href="#"><span class="fa fa-user-times"></span> Logout</a></li>
                                 <?php if (Auth::user()->isAdmin()){ ?>
                                     <li class="divider"></li>
-                                    <li><a href="{{ route('administration') }}">administracion</a></li>
+                                    <li><a href="{{ route('admin') }}">administracion</a></li>
                                 <?php } ?>
                               </ul>
                         </li>
 
 
                     <?php } ?>
-                    <li role="presentation"><a href="{{ route('cart-show')}}"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{$cartCount}}</span></a></li>
+                    {{-- <li role="presentation"><a href="{{ route('cart-show')}}"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{$cartCount}}</span></a></li> --}}
+                    <li role="presentation"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{$cartCount}}</span></a></li>
                 </ul>
             </div>
         </div>
@@ -173,8 +174,8 @@ if (Auth::check()) $classcheck ="";
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
-    <script src="{{ asset('/js/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('/js/grayscale.js') }}"></script>
+    <script src="{{ asset('krito/js/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('krito/js/grayscale.js') }}"></script>
 
 
     @yield('script')

@@ -27,6 +27,11 @@ class PicCategory extends Model
             ->orderBy('created_at', 'ASC');
     }
 
+    public static function getMainCategory()
+    {
+        return static::where('pic_category_id', null)->get();
+    }
+
     public function setPremiumAttribute($value)
     {
         $this->attributes['premium'] = $value ? true : false;

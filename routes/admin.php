@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/', function () {
+Route::name('admin')->get('/', function () {
     return view('admin.welcome');
 });
 

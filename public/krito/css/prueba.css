@@ -1,0 +1,23 @@
+/*.img-marco {
+  position: absolute;
+  left: 0;
+  right: 5px;
+  margin: 0 auto;
+  top: 80px;
+  width: 200px;
+}
+
+.marco {
+
+	z-index: 100;
+}*/
+
+.list-center {
+	display: table;
+	margin: 0 auto;
+}
+
+.fotorama__thumb-border {
+    border-color: #E928D9;
+}
+

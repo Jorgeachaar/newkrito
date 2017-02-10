@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -44,6 +45,7 @@ class Kernel extends HttpKernel
         'admin'  => [
             'web',
             'auth',
+            Authorize::class.':admin'
         ],
     ];
 
