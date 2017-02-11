@@ -97,7 +97,7 @@ if (Auth::check()) $classcheck ="";
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/videos/free') }}">Free videos</a></li>
                             @if (Auth::check())
-                                <li><a href="{{ url('/videos/private') }}">Privates videos</a></li>
+                                <li><a href="{{ url('/videos/private') }}">Private videos</a></li>
                             @endif
                         </ul>
                     </li>
@@ -115,7 +115,7 @@ if (Auth::check()) $classcheck ="";
                     </li>
                     <?php if (!Auth::check()){ ?>
                     <li>
-                        <a href="{{ url('/auth/login') }}" id="verbtnLogin" ><span class="fa fa-user fa-1x"></span> Members</a><!-- data-toggle="modal" data-target="#exampleModal" -->
+                        <a href="{{ route('login') }}" id="verbtnLogin" ><span class="fa fa-user fa-1x"></span> Members</a><!-- data-toggle="modal" data-target="#exampleModal" -->
                     </li>
                     <?php } else {?>
                         <li class="dropdown">
@@ -123,7 +123,18 @@ if (Auth::check()) $classcheck ="";
                               <ul class="dropdown-menu" role="menu">
                                 {{-- <li><a href="{{ route('change-pass') }}"><span class="fa fa-refresh">Change password</span></a></li> --}}
                                 <li><a href=""><span class="fa fa-refresh">Change password</span></a></li>
-                                <li><a href="#"><span class="fa fa-user-times"></span> Logout</a></li>
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            <span class="fa fa-user-times"></span>
+                                            Logout
+                                        </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
                                 <?php if (Auth::user()->isAdmin()){ ?>
                                     <li class="divider"></li>
                                     <li><a href="{{ route('admin') }}">administracion</a></li>
