@@ -51,7 +51,32 @@ class HomeController extends Controller
             Session::flash('message', $message);
             return back();
         }
-        
+    }
 
+    public function changePassword()
+    {
+        return view('auth.passwords.change');
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $this->validate($request, [
+            'oldpassword' => 'required',
+            'password' => 'required|confirmed|min:6',
+            'password_confirmation' => 'required',
+        ]);
+        
+        $user = auth()->user();
+        $oldpass = $request->input('oldpassword');
+        $pass = $request->input('password');
+
+        if(\Hash::check($oldpass, $user->getAuthPassword())){
+            $user->password = bcrypt($pass);
+            $user->save();  
+            return redirect()->route('index');
+        } else {
+            return back()->withErrors('Your old password is incorrect.');
+            
+        }
     }
 }

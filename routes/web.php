@@ -5,6 +5,9 @@ Route::name('contact')->post('/', 'HomeController@sendContact');
 
 Route::name('pic.category')->get('/pics/{picCategory}-{slug}','PicController@show');
 
+Route::name('password.change')->get('changepassword', 'HomeController@changePassword')->middleware('auth');
+Route::name('password.change')->post('changepassword', 'HomeController@resetPassword')->middleware('auth');
+
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index');

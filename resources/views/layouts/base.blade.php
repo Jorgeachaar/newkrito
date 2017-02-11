@@ -121,8 +121,7 @@ if (Auth::check()) $classcheck ="";
                         <li class="dropdown">
                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-user fa-1x"></span>  {{Auth::user()->name}} <span class="caret"></span></a>
                               <ul class="dropdown-menu" role="menu">
-                                {{-- <li><a href="{{ route('change-pass') }}"><span class="fa fa-refresh">Change password</span></a></li> --}}
-                                <li><a href=""><span class="fa fa-refresh">Change password</span></a></li>
+                                <li><a href="{{ route('password.change') }}"><span class="fa fa-refresh">Change password</span></a></li>
                                 <li>
                                     <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
