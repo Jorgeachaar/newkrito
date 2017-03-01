@@ -28,20 +28,20 @@ class PicCategoryController extends Controller
     {
         $this->doValidate($request);
 
-        $category = new PicCategory;
+        $item = new PicCategory;
 
-        $category->fill($request->all());
+        $item->fill($request->all());
 
         if ($request->file('image'))
-            $category->image = $request->file('image')->store('pic/category', 'public');
+            $item->image = $request->file('image')->store('pic/category', 'public');
 
         if ($request->file('image2'))
-            $category->image2 = $request->file('image2')->store('pic/category', 'public');
+            $item->image2 = $request->file('image2')->store('pic/category', 'public');
 
         $maxPosition = PicCategory::max('position');
-        $category->position = $maxPosition ? ++$maxPosition : 1;
+        $item->position = $maxPosition ? ++$maxPosition : 1;
 
-        $category->save();
+        $item->save();
 
         return $this->urlList();
     }

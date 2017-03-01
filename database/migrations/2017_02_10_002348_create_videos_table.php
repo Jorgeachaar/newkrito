@@ -16,10 +16,12 @@ class CreateVideosTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string("desc");
-            $table->string("url_youtube");
-            $table->string("url_vimeo");
-            $table->string("url_private");
+            $table->string("title");
+            $table->string("url");
+            $table->integer("position");
+            // $table->string("url_youtube");
+            // $table->string("url_vimeo");
+            // $table->string("url_private");
             $table->boolean("premium")->default(false);
             $table->timestamps();
         });

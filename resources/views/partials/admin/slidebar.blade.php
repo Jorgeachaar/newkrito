@@ -44,7 +44,7 @@
           </ul>
         </li>
         <li class="header">VIDEOS</li>
-        <li class=""><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
+        <li class=""><a href="{{ route('videos.index') }}"><i class="fa fa-link"></i> <span>Videos</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

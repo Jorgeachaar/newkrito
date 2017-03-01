@@ -95,9 +95,9 @@ if (Auth::check()) $classcheck ="";
                     <li>
                         <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Videos<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/videos/free') }}">Free videos</a></li>
+                            <li><a href="{{ route('videos.show') }}">Free videos</a></li>
                             @if (Auth::check())
-                                <li><a href="{{ url('/videos/private') }}">Private videos</a></li>
+                                <li><a href="#">Private videos</a></li>
                             @endif
                         </ul>
                     </li>
