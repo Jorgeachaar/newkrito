@@ -1,7 +1,8 @@
 @extends('layouts.admin.base')
 
 @section('css')
-	
+	<!-- bootstrap wysihtml5 - text editor -->
+	<link rel="stylesheet" href="{{ asset('plugins/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 @endsection
 
 @section('title_page_header', 'Configuración web:')
@@ -15,8 +16,8 @@
 	 			{!! Field::text('twitter') !!}
 	 			{!! Field::text('instagram') !!}
 	 			{!! Field::text('wishlist') !!}
-	 			{!! Field::text('about') !!}
-	 			{!! Field::text('contact') !!}
+	 			{!! Field::textarea('about', ['class'=>'textarea']) !!}
+	 			{!! Field::textarea('contact', ['class'=>'textarea']) !!}
 			</div>
 
 			<div class="box-footer">
@@ -29,9 +30,14 @@
 @endsection
 
 @section('js')
+
+	<script src="{{ asset('plugins/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
 	
 	<script type="text/javascript">
-		
+		$(function () {
+		//bootstrap WYSIHTML5 - text editor
+		$(".textarea").wysihtml5();
+		});
 	</script>
 
 @endsection

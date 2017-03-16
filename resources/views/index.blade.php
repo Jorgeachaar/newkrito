@@ -78,7 +78,7 @@
                         <p class="text-center"><img id="imgabout" class="img-center" src="krito/img/logo.png" alt=""></p>
                     </div>
                     <div id="abouttext" class="col-lg-7">
-                        <p>{{ $settings->about }}</p>
+                        <p>{!! $settings->about !!}</p>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Contact Krito</h2>
-                <p>{{ $settings->contact }}</p>
+                <p>{!! $settings->contact !!}</p>
             </div>
         </div>
         <div class="row">
