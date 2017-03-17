@@ -4,7 +4,7 @@ Route::name('index')->get('/', 'HomeController@index');
 
 Route::name('contact')->post('/', 'HomeController@sendContact');
 
-Route::name('pic.category')->get('/pics/{picCategory}-{slug}','PicController@show');
+Route::name('pic.category')->get('/pics/{picCategory}-{slug}','PicController@show')->middleware('pic');;
 
 Route::name('videos.show')->get('/videos','VideoController@show');
 
