@@ -13,3 +13,5 @@ Route::name('setting.edit')->get('settings',  'Admin\SettingController@edit');
 Route::name('setting.update')->put('settings',  'Admin\SettingController@update');
 
 Route::resource('videos',  'Admin\VideoController');
+
+Route::resource('posts',  'Admin\PostController');
