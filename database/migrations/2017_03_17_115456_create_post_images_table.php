@@ -19,7 +19,7 @@ class CreatePostImagesTable extends Migration
             $table->integer('post_id')->unsigned();
             $table->string('image');
             $table->string('desc');            
-            $table->integer('orden');            
+            $table->integer('position');            
             $table->timestamps();
 
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');

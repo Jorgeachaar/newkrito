@@ -1,14 +1,14 @@
 @extends('layouts.admin.base')
 
-@section('title_page_header', 'Imagenes para Categorias: ' . $category->title)
+@section('title_page_header', 'Imagenes para el post: ' . $post->title)
 
-@section('description_page_header', 'lista de categoría de imágenes')
+@section('description_page_header', 'Imágenes')
 
 @section('content')
 
-    {!! Form::open(['method' => 'POST', 'route' => 'picCategories.images.store', 'enctype'=>'multipart/form-data']) !!}
+    {!! Form::open(['method' => 'POST', 'route' => 'posts.images.store', 'enctype'=>'multipart/form-data']) !!}
 
-      {!! Form::hidden('pic_category_id', $category->id)!!}
+      {!! Form::hidden('post_id', $post->id)!!}
       {!! Form::file('image[]', array('multiple'=>true)) !!}
 
       <div class="box-footer">
@@ -20,11 +20,12 @@
     <h3>Lista de imagenes</h3>
     
     <div class="row" style="margin-left: 10px">
-      @foreach ($category->images as $image)
+      @foreach ($post->images as $image)
         <div class="pull-left">
           <div class="thumbnail">
-            <img src="{{ $image->url_thumbnail_image }}" alt="">
-            <div class="caption">
+            <img src="{{ $image->image }}" alt="">
+            {{-- <img src="{{ $image->url_thumbnail_image }}" alt=""> --}}
+            {{-- <div class="caption">
             {{ Form::model($image, array('route' => array('picCategoryImages.update', $image->id), 'method' => 'PUT')) }}
                 {!! Field::number('position') !!}
                 <button type="submit" class="btn btn-primary">Refrescar</button>
@@ -43,7 +44,7 @@
               </a></p>
               {{ Form::open(array('route' => array('picCategoryImages.destroy', $image->id), 'method' => 'delete', 'id'=>'destroy-form-'. $image->id)) }}
               {{ Form::close() }}
-            </div>
+            </div> --}}
           </div>
         </div>
       @endforeach

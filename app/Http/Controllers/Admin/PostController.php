@@ -75,4 +75,51 @@ class PostController extends Controller
     {
         return redirect()->route('posts.index');        
     }
+
+    public function listImage(Post $post)
+    {
+        return view('admin.posts.listImage', compact('post'));
+    }
+
+    public function storeImage(Request $request)
+    {
+        $maxPosition = PostImage::max('position');
+        $maxPosition = $maxPosition ? ++$maxPosition : 1;
+
+        $this->validate($request,  [
+            'post_id' => 'required|exists:posts,id',
+            'image.*' => 'image|mimes:jpg,jpeg,png,bmp|max:20000'
+        ]);
+
+        $post_id = $request->input('post_id'); 
+        $images = $request->file('image');
+
+        if($images && (count($images)>0) )
+        {
+            foreach($images as $image) {
+
+                $pic_image = new PostImage;
+
+                $pic_image->fill($request->all());
+                $pic_image->position = $maxPosition++;
+
+                $pic_image->description = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $pic_image->image = $image->store('post/images', 'public');
+                
+                $img = Image::make($image);
+                
+                $img->fit(180, 180, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+
+                Storage::disk('public')->put('post/images/thumbnail/' . $pic_image->image, (string) $img->encode());
+
+                $pic_image->save();
+
+            }
+        }
+
+        return back();
+    }
 }

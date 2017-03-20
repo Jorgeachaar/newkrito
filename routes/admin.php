@@ -15,3 +15,5 @@ Route::name('setting.update')->put('settings',  'Admin\SettingController@update'
 Route::resource('videos',  'Admin\VideoController');
 
 Route::resource('posts',  'Admin\PostController');
+Route::name('posts.images.show')->get('posts/{post}/images', 'Admin\PostController@listImage');
+Route::name('posts.images.store')->post('posts/images/create', 'Admin\PostController@storeImage');
