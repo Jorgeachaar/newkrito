@@ -10,11 +10,27 @@ class SettingController extends Controller
 {
     public function edit(Setting $setting)
     {
-        return view('admin.settings.form');
+    	$item = Setting::getSetting();
+
+        return view('admin.settings.form', compact('item'));
     }
 
-    public function update(Request $request, Setting $setting)
+    public function update(Request $request)
     {
-        //
+    	$setting = Setting::getSetting();
+
+    	$this->validate($request, [
+    		'facebook' => 'required',
+    		'twitter' => 'required',
+    		'instagram' => 'required',
+    		'wishlist' => 'required',
+    		'about' => 'required',
+    		'contact' => 'required',
+    	]);
+
+    	$setting->fill($request->all());
+    	$setting->save();
+
+    	return back();
     }
 }

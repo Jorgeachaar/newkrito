@@ -30,8 +30,7 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">PICS</li>
-        <li class=""><a href="{{ route('setting.edit') }}"><i class="fa fa-link"></i> <span>Configuración</span></a></li>
+        {{-- <li class="header">PICS</li>
         <li class="treeview">
           <a href="#" class="{{ isActiveToArray(['picCategories.index']) }}"><i class="fa fa-link"></i> <span>Multilevel</span>
             <span class="pull-right-container">
@@ -43,8 +42,11 @@
             <li><a class="{{ isActiveToArray(['']) }}" href="#">Link in level 2</a></li>
           </ul>
         </li>
-        <li class="header">VIDEOS</li>
+        <li class="header">VIDEOS</li> --}}
+        <li class="{{ isActiveToArray(['setting.edit']) }}"><a href="{{ route('setting.edit') }}"><i class="fa fa-link"></i> <span>Configuración</span></a></li>
+        <li class="{{ isActiveToArray(['picCategories.index']) }}"><a href="{{ route('picCategories.index') }}"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
         <li class=""><a href="{{ route('videos.index') }}"><i class="fa fa-link"></i> <span>Videos</span></a></li>
+        <li class=""><a href="{{ route('posts.index') }}"><i class="fa fa-link"></i> <span>Post</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

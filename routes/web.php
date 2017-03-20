@@ -1,4 +1,5 @@
 <?php
+// Route::get('/home', 'HomeController@index');
 
 Route::name('index')->get('/', 'HomeController@index');
 
@@ -13,4 +14,5 @@ Route::name('password.change')->post('changepassword', 'HomeController@resetPass
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index');
+Route::name('posts.list')->get('blog', 'PostController@lists');
+Route::name('posts.show')->get('blog/{post}-{slug}', 'PostController@show');

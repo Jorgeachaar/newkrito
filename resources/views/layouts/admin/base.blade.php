@@ -1,28 +1,23 @@
 
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>JacDesign | Administration</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  {{-- Tell the browser to be responsive to screen width --}}
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.6 -->
+  {{-- Bootstrap 3.3.6 --}}
   <link rel="stylesheet" href="{{ asset('plugins/adminlte/bootstrap/css/bootstrap.min.css') }}">
-  <!-- Font Awesome -->
+  {{-- Font Awesome --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
+  {{-- Ionicons --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
+  {{-- Theme style --}}
 <link rel="stylesheet" href="{{ asset('plugins/adminlte/dist/css/AdminLTE.min.css') }}">
-<!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+{{-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
-        apply the skin class to the body tag so the changes take effect.
-  -->
+        apply the skin class to the body tag so the changes take effect. --}}
 <link rel="stylesheet" href="{{ asset('plugins/adminlte/dist/css/skins/skin-blue.min.css') }}">
 
 @yield('css')
@@ -34,7 +29,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<!--
+
+{{-- 
 BODY TAG OPTIONS:
 =================
 Apply one or more of the following classes to get the
@@ -52,28 +48,29 @@ desired effect
 |               | layout-top-nav                          |
 |               | sidebar-collapse                        |
 |               | sidebar-mini                            |
-|---------------------------------------------------------|
--->
+|---------------------------------------------------------| 
+--}}
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  <!-- Main Header -->
+  {{-- Main Header --}}
   <header class="main-header">
 
-    <!-- Logo -->
+    {{-- Logo --}}
     <a href="#" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
+      {{-- mini logo for sidebar mini 50x50 pixels --}}
       <span class="logo-mini"><b>Jac</b>D</span>
-      <!-- logo for regular state and mobile devices -->
+      {{-- logo for regular state and mobile devices --}}
       <span class="logo-lg"><b>Jac</b>Design</span>
     </a>
 
     @include('partials.admin.header')
     @include('partials.admin.slidebar')
 
-  <!-- Content Wrapper. Contains page content -->
+  {{-- Content Wrapper. Contains page content --}}
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    {{-- Content Header (Page header) --}}
     <section class="content-header">
       <h1>
         @yield('title_page_header')
@@ -85,15 +82,15 @@ desired effect
       </ol> --}}
     </section>
 
-    <!-- Main content -->
+    {{-- Main content --}}
     <section class="content">
       @yield('content')
     </section>
-    <!-- /.content -->
+    {{-- /.content --}}
   </div>
-  <!-- /.content-wrapper -->
+  {{-- /.content-wrapper --}}
 
-  <!-- Main Footer -->
+  {{-- Main Footer --}}
   @include('partials.admin.footer')
 
   {{-- <!-- Control Sidebar -->
@@ -173,22 +170,22 @@ desired effect
        immediately after the control sidebar -->
   {{-- <div class="control-sidebar-bg"></div> --}}
 </div>
-<!-- ./wrapper -->
+{{-- ./wrapper --}}
 
-<!-- REQUIRED JS SCRIPTS -->
+{{-- REQUIRED JS SCRIPTS --}}
 
-<!-- jQuery 2.2.3 -->
+{{-- jQuery 2.2.3 --}}
 <script src="{{ asset('plugins/adminlte/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
-<!-- Bootstrap 3.3.6 -->
+{{-- Bootstrap 3.3.6 --}}
 <script src="{{ asset('plugins/adminlte/bootstrap/js/bootstrap.min.js') }}"></script>
-<!-- AdminLTE App -->
+{{-- AdminLTE App --}}
 <script src="{{ asset('plugins/adminlte/dist/js/app.min.js') }}"></script>
 
 @yield('js')
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
+{{-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
-     fixed layout. -->
+     fixed layout. --}}
 </body>
 </html>

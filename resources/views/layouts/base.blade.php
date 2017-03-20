@@ -102,7 +102,7 @@ if (Auth::check()) $classcheck ="";
                         </ul>
                     </li>
                     <li>
-                        <a class="" href="{{ url('blog')}}">Blog</a>
+                        <a class="" href="{{ route('posts.list') }}">Blog</a>
                     </li>
                     <li>
                         <a class="page-scroll" href="#contact">Contact</a>
