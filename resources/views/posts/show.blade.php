@@ -38,11 +38,11 @@
                                 @for ($i = 0; $i < count($post->images) - 1 ; $i++)
                                     @if ($i == 0)
                                         <div class="item active">
-                                            <img class="img-responsive img-full" src="{{asset('img/posts/thumb_'.$post->images[$i]->url)}}" alt="">
+                                            <img class="img-responsive img-full" src="{{asset($post->images[$i]->url_image)}}" alt="">
                                         </div>
                                     @else
                                          <div class="item">
-                                            <img class="img-responsive img-full" src="{{asset('img/posts/thumb_'.$post->images[$i]->url)}}" alt="">
+                                            <img class="img-responsive img-full" src="{{asset($post->images[$i]->url_image)}}" alt="">
                                         </div>
                                     @endif
                                 @endfor
