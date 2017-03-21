@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\PostImage;
 use Illuminate\Http\Request;
+use Image;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -120,6 +123,24 @@ class PostController extends Controller
             }
         }
 
+        return back();
+    }
+
+    public function updateImage(Request $request, PostImage $postImage)
+    {
+        $this->validate($request, [
+            'position' => 'required|integer|min:0',
+        ]);
+
+        $postImage->position = $request->input('position');
+        $postImage->save();
+
+        return back();
+    }
+
+    public function destroyImage(PostImage $postImage)
+    {
+        $postImage->delete();
         return back();
     }
 }

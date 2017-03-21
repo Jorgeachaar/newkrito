@@ -18,7 +18,7 @@ class CreatePostImagesTable extends Migration
             $table->increments('id');
             $table->integer('post_id')->unsigned();
             $table->string('image');
-            $table->string('desc');            
+            $table->string('description');            
             $table->integer('position');            
             $table->timestamps();
 
