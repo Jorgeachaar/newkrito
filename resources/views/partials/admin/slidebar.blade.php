@@ -47,6 +47,7 @@
         <li class="{{ isActiveToArray(['picCategories.index']) }}"><a href="{{ route('picCategories.index') }}"><i class="fa fa-link"></i> <span>Categorias</span></a></li>
         <li class=""><a href="{{ route('videos.index') }}"><i class="fa fa-link"></i> <span>Videos</span></a></li>
         <li class=""><a href="{{ route('posts.index') }}"><i class="fa fa-link"></i> <span>Post</span></a></li>
+        <li class=""><a href="{{ route('productCategory.index') }}"><i class="fa fa-link"></i> <span>Category Product</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

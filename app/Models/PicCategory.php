@@ -66,7 +66,6 @@ class PicCategory extends Model
         $this->saveThumbnail($value);        
     }
 
-
     public function getUrlThumbnailImageAttribute()
     {
         return asset('storage/pic/category/thumbnail/' . $this->image);
