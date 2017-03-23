@@ -10,8 +10,6 @@ class ProductCategory extends Model
 {
     protected $fillable = [
         'title',
-        'image',
-        'image2'
     ];
 
     public function setImageAttribute($value)
@@ -28,7 +26,7 @@ class ProductCategory extends Model
 
     public function getUrlThumbnailImageAttribute()
     {
-        return asset('storage/porduct/category/thumbnail/' . $this->image);
+        return asset('storage/product/category/thumbnail/' . $this->image);
     }
 
     public function getUrlImageAttribute()
@@ -38,7 +36,7 @@ class ProductCategory extends Model
 
     public function getUrlThumbnailImage2Attribute()
     {
-        return asset('storage/porduct/category/thumbnail/' . $this->image2);
+        return asset('storage/product/category/thumbnail/' . $this->image2);
     }
 
     public function getUrlImage2Attribute()
@@ -48,21 +46,17 @@ class ProductCategory extends Model
 
     public function saveThumbnail($value)
     {
-        dd($value);
-
         $url = 'storage/' . $value;
 
-        Image::make($url);
-
-        // $img = Image::make($url);
+        $img = Image::make($url);
             
-        // $img->fit(180, 180, function ($constraint) {
-        //     $constraint->aspectRatio();
-        // });
+        $img->fit(180, 180, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
-        // $urlThumbnail = 'product/category/thumbnail/' . $value;
+        $urlThumbnail = 'product/category/thumbnail/' . $value;
 
-        // Storage::disk('public')->put($urlThumbnail, (string) $img->encode());
+        Storage::disk('public')->put($urlThumbnail, (string) $img->encode());
     }
 
 }
