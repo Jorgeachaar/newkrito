@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class ProductCategory extends Model
 {
@@ -59,4 +60,28 @@ class ProductCategory extends Model
         Storage::disk('public')->put($urlThumbnail, (string) $img->encode());
     }
 
+    public function delete() 
+    {
+        $this->deleteImage($this->image);
+        $this->deleteImage($this->image2);
+        parent::delete();
+    }
+
+    public function deleteImage($value)
+    {
+        if (isset($value) && !empty($value)) {
+
+            $path = 'storage/' . $value;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $path = 'storage/product/category/thumbnail/' . $value;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+        }
+    }
 }

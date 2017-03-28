@@ -46,14 +46,46 @@ class ProductCategoryController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit(ProductCategory $productCategory)
     {
-        //
+        $item = $productCategory;
+        return view('admin.productCategory.form', compact('item'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, ProductCategory $productCategory)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required|min:3',
+            'position' => 'integer',
+        ]);
+
+        $productCategory->fill($request->all());
+
+        $productCategory->position = $request->input('position');
+
+        if ($request->file('image'))
+        {
+            $this->validate($request, [
+                'image' => ['required','image'],
+            ]);
+            $oldImage = $productCategory->image;
+            $productCategory->image = $request->file('image')->store('product/category', 'public');
+            $productCategory->deleteImage($oldImage);
+        }
+
+        if ($request->file('image2'))
+        {
+            $this->validate($request, [
+                'image2' => ['required','image'],
+            ]);
+            $oldImage = $productCategory->image2;
+            $productCategory->image2 = $request->file('image2')->store('product/category', 'public');
+            $productCategory->deleteImage($oldImage);
+        }
+
+        $productCategory->save();
+
+        return $this->urlList();
     }
 
     public function destroy(ProductCategory $productCategory)
