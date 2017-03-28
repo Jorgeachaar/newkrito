@@ -66,7 +66,6 @@ class PicCategory extends Model
         $this->saveThumbnail($value);        
     }
 
-
     public function getUrlThumbnailImageAttribute()
     {
         return asset('storage/pic/category/thumbnail/' . $this->image);
@@ -91,13 +90,11 @@ class PicCategory extends Model
     {
         $url = 'storage/' . $value;
 
-        Image::make($url);
-
         $img = Image::make($url);
             
-        // $img->fit(180, 180, function ($constraint) {
-        //     $constraint->aspectRatio();
-        // });
+        $img->fit(180, 180, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
         $img->fit(300);
 

@@ -19,3 +19,6 @@ Route::name('posts.images.show')->get('posts/{post}/images', 'Admin\PostControll
 Route::name('posts.images.store')->post('posts/images/create', 'Admin\PostController@storeImage');
 Route::name('posts.images.update')->put('posts/images/{postImage}', 'Admin\PostController@updateImage');
 Route::name('posts.images.destroy')->delete('posts/images/{postImage}', 'Admin\PostController@destroyImage');
+
+
+Route::resource('productCategory', 'Admin\ProductCategoryController');
