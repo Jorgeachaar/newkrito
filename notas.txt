@@ -6,6 +6,13 @@ From para los email como configurarlo
 Poder configurar el setting
 Pagina de errores customizar
 
+NUEVPS
+CUAndo elimina una categoria validar que no sea de otra
+CAtegoria cuadno se elimina eliminar imagenes
+en combo de las categoria cuando se modifica que no aparezca su propia categoria
+
+
+
 LINKS
 
 https://styde.net/ckeditor-en-laravel-5/

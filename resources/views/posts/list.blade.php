@@ -23,7 +23,7 @@
                 @foreach ($posts as $post)
                     <div class="col-lg-12 text-center">
                         @if (count($post->images)> 0)
-                            <img class="img-responsive img-border img-full" src="{{asset('img/posts/thumb_'.$post->images->first()->url)}}" alt="">
+                            <img class="img-responsive img-border img-full" src="{{asset($post->images->first()->url_image)}}" alt="">
                         @endif
                         <h2>{{ $post->title }}
                             <br>

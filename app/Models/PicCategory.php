@@ -99,6 +99,8 @@ class PicCategory extends Model
         //     $constraint->aspectRatio();
         // });
 
+        $img->fit(300);
+
         $urlThumbnail = 'pic/category/thumbnail/' . $value;
 
         Storage::disk('public')->put($urlThumbnail, (string) $img->encode());
