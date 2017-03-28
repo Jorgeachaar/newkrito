@@ -13,6 +13,11 @@ class ProductCategory extends Model
         'title',
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function setImageAttribute($value)
     {
         $this->attributes['image'] = $value;
