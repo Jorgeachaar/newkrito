@@ -24,7 +24,7 @@
                         <div id="carousel-example-generic" class="carousel slide">
                             <!-- Indicators -->
                             <ol class="carousel-indicators hidden-xs">                                
-                                @for ($i = 0; $i < count($post->images) - 1 ; $i++)
+                                @for ($i = 0; $i < count($post->images) ; $i++)
                                     @if ($i == 0)
                                         <li data-target="#carousel-example-generic" data-slide-to="{{ $i+1 }}" class="active"></li>
                                     @else
