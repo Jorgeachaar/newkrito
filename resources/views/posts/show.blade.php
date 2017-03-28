@@ -35,17 +35,18 @@
 
                             <!-- Wrapper for slides -->
                             <div class="carousel-inner">
-                                @for ($i = 0; $i < count($post->images) - 1 ; $i++)
-                                    @if ($i == 0)
+                                @foreach ($post->images as $image)
+                                    @if ($loop->first)
                                         <div class="item active">
-                                            <img class="img-responsive img-full" src="{{asset($post->images[$i]->url_image)}}" alt="">
+                                            <img class="img-responsive img-full" src="{{asset($image->url_image)}}" alt="">
                                         </div>
                                     @else
-                                         <div class="item">
-                                            <img class="img-responsive img-full" src="{{asset($post->images[$i]->url_image)}}" alt="">
+                                        <div class="item">
+                                            <img class="img-responsive img-full" src="{{asset($image->url_image)}}" alt="">
                                         </div>
                                     @endif
-                                @endfor
+
+                                @endforeach
                             </div>
 
                             <!-- Controls -->
