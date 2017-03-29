@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 
@@ -17,5 +18,10 @@ class ShopController extends Controller
     {
     	$category = ProductCategory::findOrFail($category_id);
         return view('shop.list', compact('category'));
+    }
+
+    public function showProduct(Product $product)
+    {
+        return view('shop.product', compact('product'));
     }
 }

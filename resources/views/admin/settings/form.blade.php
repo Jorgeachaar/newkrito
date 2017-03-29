@@ -1,7 +1,6 @@
 @extends('layouts.admin.base')
 
 @section('css')
-	<!-- bootstrap wysihtml5 - text editor -->
 	<link rel="stylesheet" href="{{ asset('plugins/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
 @endsection
 
@@ -35,8 +34,7 @@
 	
 	<script type="text/javascript">
 		$(function () {
-		//bootstrap WYSIHTML5 - text editor
-		$(".textarea").wysihtml5();
+			$(".textarea").wysihtml5();
 		});
 	</script>
 

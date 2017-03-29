@@ -19,3 +19,11 @@ Route::name('posts.show')->get('blog/{post}-{slug}', 'PostController@show');
 
 Route::name('shop.show')->get('shop', 'ShopController@show');
 Route::name('shop.list')->get('shop/{category_id}', 'ShopController@list_category');
+Route::name('shop.product.show')->get('shopp/product/{product}', 'ShopController@showProduct');
+
+Route::name('cart.add')->get('cart/add/{id}', 'CartController@add');
+// Route::name('cart.delete')->get('cart/add/{id}', 'CartController@delete');
+// Route::name('cart.trash')->get('cart/trash', 'CartController@trash');
+// Route::name('cart.update')->get('cart/update/{id}/{quantity}', 'CartController@update');
+// Route::name('cart.detail')->get('cart/detail', 'CartController@detail');
+// Route::name('cart.order')->get('cart/order', 'CartController@order');

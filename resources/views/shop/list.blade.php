@@ -24,10 +24,8 @@
 							<h1><a href="#">{{$product->desc}}</a></h1>
 			                <p>${{$product->price}}</p>
 			                <p>
-			                	{{-- <a href="{{route('cart-add', $product->id)}}" class="btn btn-primary">ADD TO CART</a> --}}
-			                	<a href="#" class="btn btn-primary">ADD TO CART</a>
-			                	{{-- <a href="{{ route('viewShop', $product->id) }}" class="btn btn-primary">SHOW</a> --}}
-			                	<a href="#" class="btn btn-primary">SHOW</a>
+			                	<a href="{{route('cart.add', $product->id)}}" class="btn btn-primary">ADD TO CART</a>
+			                	<a href="{{ route('shop.product.show', $product->id) }}" class="btn btn-primary">SHOW</a>
 			                </p>
 						</article>
 
@@ -40,7 +38,7 @@
 @stop
 
 @section('script')
-	<script src="{{ asset('/js/pinterest_grid.js') }}"></script>
+	<script src="{{ asset('krito/js/pinterest_grid.js') }}"></script>
 
 	<script>
 

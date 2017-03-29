@@ -1,9 +1,3 @@
-
-<?php 
-    $cart = \Session::get('cart');
-    $cartCount = count($cart);
- ?>
-
 <!DOCTYPE html>
 <html lang="es">
 	<head>
@@ -144,7 +138,7 @@ if (Auth::check()) $classcheck ="";
 
                     <?php } ?>
                     {{-- <li role="presentation"><a href="{{ route('cart.show')}}"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{$cartCount}}</span></a></li> --}}
-                    <li role="presentation"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{$cartCount}}</span></a></li>
+                    <li role="presentation"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> <span class="badge">{{Cart::count()}}</span></a></li>
                 </ul>
             </div>
         </div>

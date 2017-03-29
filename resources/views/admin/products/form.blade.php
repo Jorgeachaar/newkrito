@@ -1,5 +1,9 @@
 @extends('layouts.admin.base')
 
+@section('css')
+	<link rel="stylesheet" href="{{ asset('plugins/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+@endsection
+
 @if (isset($item))
 	@section('title_page_header', 'Editar producto: ' .$item->description)
 @else
@@ -18,8 +22,8 @@
 		@endif
 			<div class="box-body">
 				{!! Form::hidden('product_category_id', $category->id) !!}
-	 			{!! Field::text('title') !!}				
-	 			{!! Field::text('description') !!}				
+	 			{!! Field::text('title') !!}
+	 			{!! Field::textarea('description', ['class'=>'textarea']) !!}
 				{!! Field::number('price') !!}
 			</div>
 
@@ -29,4 +33,17 @@
 			</div>
 	 	{!! Form::close() !!}
 	</div>
+
+@endsection
+
+@section('js')
+
+	<script src="{{ asset('plugins/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>
+	
+	<script type="text/javascript">
+		$(function () {
+			$(".textarea").wysihtml5();
+		});
+	</script>
+
 @endsection

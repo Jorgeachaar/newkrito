@@ -25,7 +25,6 @@
                 <tr>
                   <th>id</th>
                   <th>Título</th>
-                  <th>Descripción</th>
                   <th>Precio</th>
                   <th>Options</th>                  
                 </tr>
@@ -35,7 +34,6 @@
                 <tr>
                   <td>{{ $item->id }}</td>
                   <td>{{ $item->title }}</td>
-                  <td>{{ $item->description }}</td>
                   <td>{{ $item->price }}</td>
                   <td>
                     <a href="{{ route('productCategory.edit', $item->id) }}" class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> update</a>
@@ -63,7 +61,6 @@
                 <tr>
                   <th>id</th>
                   <th>Título</th>
-                  <th>Descripción</th>
                   <th>Price</th>
                   <th>Options</th>
                 </tr>

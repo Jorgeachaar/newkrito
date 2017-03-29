@@ -7,7 +7,6 @@
     <meta name='keywords' content='palabras, clave'>
     <meta name='robots' content='noindex,nofollow'>
     <link href="{{ asset('/css/shop.css') }}" rel="stylesheet">
-
 @stop
 
 @section('container')
