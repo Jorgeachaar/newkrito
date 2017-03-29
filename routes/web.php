@@ -16,3 +16,6 @@ Auth::routes();
 
 Route::name('posts.list')->get('blog', 'PostController@lists');
 Route::name('posts.show')->get('blog/{post}-{slug}', 'PostController@show');
+
+Route::name('shop.show')->get('shop', 'ShopController@show');
+Route::name('shop.list')->get('shop/{category_id}', 'ShopController@list_category');

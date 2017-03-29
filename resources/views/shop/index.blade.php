@@ -1,4 +1,4 @@
-@extends('layout.basek')
+@extends('layouts.base')
 
 @section('head')
     <title>Krito - Shop</title>
@@ -6,8 +6,7 @@
     <meta name='description' content='Kontrol'>
     <meta name='keywords' content='palabras, clave'>
     <meta name='robots' content='noindex,nofollow'>
-    <link href="{{ asset('/css/shop.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('krito/css/shop.css') }}" rel="stylesheet">
 @stop
 
 @section('container')
@@ -18,19 +17,19 @@
 	        <div class="row">
 	        	@foreach ($categories as $category)
                     <div class="col-lg-4 col-sm-6 text-center ">
-                        <a href="{{ route('viewCategory', $category->id) }}">
+                        <a href="{{ route('shop.list', $category->id) }}">
                             <div id="f1_container">
                             <div id="f1_card" class="shadow">
                               <div class="front face">
-                                <img src="{{ $category->urlimg }}">
+                                <img src="{{ $category->url_thumbnail_image }}">
                               </div>
                               <div class="back face">
-                                <img src="{{ $category->urlimg2 }}">
+                                <img src="{{ $category->url_thumbnail_image2 }}">
                               </div>
                             </div>
                             </div>
                         </a>
-                        <h3>{{$category->desc}}</h3>                   
+                        <h3>{{$category->title}}</h3>                   
                     </div>
                 @endforeach
             </div>

@@ -108,7 +108,7 @@ if (Auth::check()) $classcheck ="";
                         <a class="page-scroll" href="#contact">Contact</a>
                     </li>
                     <li>
-                        <a class="" href="{{ url('shopp') }}">Shop</a>
+                        <a class="" href="{{ route('shop.show') }}">Shop</a>
                     </li>
                     <li>
                         <a class="" href="{{ $settings->wishlist }}" target="_blank">Wishlist</a>

@@ -92,11 +92,11 @@ class PicCategory extends Model
 
         $img = Image::make($url);
             
-        $img->fit(180, 180, function ($constraint) {
-            $constraint->aspectRatio();
-        });
+        // $img->fit(180, 180, function ($constraint) {
+        //     $constraint->aspectRatio();
+        // });
 
-        $img->fit(300);
+        $img->resize(300);
 
         $urlThumbnail = 'pic/category/thumbnail/' . $value;
 

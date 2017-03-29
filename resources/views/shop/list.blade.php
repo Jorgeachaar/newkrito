@@ -1,4 +1,4 @@
-@extends('layout.basek')
+@extends('layouts.base')
 
 @section('head')
     <title>Krito - Shop</title>
@@ -6,7 +6,7 @@
     <meta name='description' content='Kontrol'>
     <meta name='keywords' content='palabras, clave'>
     <meta name='robots' content='noindex,nofollow'>
-    <link href="{{ asset('/css/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('krito/css/shop.css') }}" rel="stylesheet">
 
 @stop
 
@@ -24,8 +24,10 @@
 							<h1><a href="#">{{$product->desc}}</a></h1>
 			                <p>${{$product->price}}</p>
 			                <p>
-			                	<a href="{{route('cart-add', $product->id)}}" class="btn btn-primary">ADD TO CART</a>
-			                	<a href="{{ route('viewShop', $product->id) }}" class="btn btn-primary">SHOW</a>
+			                	{{-- <a href="{{route('cart-add', $product->id)}}" class="btn btn-primary">ADD TO CART</a> --}}
+			                	<a href="#" class="btn btn-primary">ADD TO CART</a>
+			                	{{-- <a href="{{ route('viewShop', $product->id) }}" class="btn btn-primary">SHOW</a> --}}
+			                	<a href="#" class="btn btn-primary">SHOW</a>
 			                </p>
 						</article>
 

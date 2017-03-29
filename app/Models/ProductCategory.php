@@ -60,7 +60,7 @@ class ProductCategory extends Model
         //     $constraint->aspectRatio();
         // });
 
-        $img->fit(300);
+        $img->resize(300);
 
         $urlThumbnail = 'product/category/thumbnail/' . $value;
 
