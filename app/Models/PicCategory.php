@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
 
 class PicCategory extends Model
 {
@@ -56,12 +57,16 @@ class PicCategory extends Model
 
     public function setImageAttribute($value)
     {
+        if($this->image)
+            $this->deleteImage($this->image);
         $this->attributes['image'] = $value;
         $this->saveThumbnail($value);        
     }
 
     public function setImage2Attribute($value)
     {
+        if($this->image2)
+            $this->deleteImage($this->image2);
         $this->attributes['image2'] = $value;
         $this->saveThumbnail($value);        
     }
@@ -92,14 +97,37 @@ class PicCategory extends Model
 
         $img = Image::make($url);
             
-        // $img->fit(180, 180, function ($constraint) {
-        //     $constraint->aspectRatio();
-        // });
-
-        $img->resize(300);
+        $img->resize(300, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
         $urlThumbnail = 'pic/category/thumbnail/' . $value;
 
         Storage::disk('public')->put($urlThumbnail, (string) $img->encode());
+    }
+
+    public function delete() 
+    {
+        $this->deleteImage($this->image);
+        $this->deleteImage($this->image2);
+        parent::delete();
+    }
+
+    public function deleteImage($value)
+    {
+        if (isset($value) && !empty($value)) {
+
+            $path = 'storage/' . $value;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+
+            $path = 'storage/pic/category/thumbnail/' . $value;
+
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+        }
     }
 }

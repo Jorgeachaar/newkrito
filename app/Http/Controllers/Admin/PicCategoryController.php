@@ -66,6 +66,22 @@ class PicCategoryController extends Controller
             'position' => 'required|integer',
         ]);
 
+        if ($request->file('image'))
+        {
+            $this->validate($request, [
+                'image' => 'image|mimes:jpg,jpeg,png,bmp|max:20000'
+            ]);
+            $category->image = $request->file('image')->store('pic/category', 'public');
+        }
+
+        if ($request->file('image2'))
+        {
+            $this->validate($request, [
+                'image2' => 'image|mimes:jpg,jpeg,png,bmp|max:20000'
+            ]);
+            $category->image2 = $request->file('image2')->store('pic/category', 'public');
+        }
+
         $category->fill($request->all());
 
         $category->position = $request->input('position');

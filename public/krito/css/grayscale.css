@@ -459,7 +459,13 @@ section#contact .form-group textarea.form-control {
     transition: 1.4s ease-in-out;
     -moz-transition: 1.4s ease-in-out;
     -webkit-transition: 1.4s ease-in-out;
+    color: #000;
 }
+
+#textcontact {
+    color: #000;
+}
+
 .imgabout .abouttext{
     opacity: 1;
     /*transform: translate(0em, 0);
@@ -476,6 +482,7 @@ section#contact .form-group textarea.form-control {
 
 
 .abouttexta {
+    color: #000;
     opacity: 0;
     /*transform: translate(45em, 0);
     -moz-transform: translate(45em, 0);

@@ -56,11 +56,9 @@ class ProductCategory extends Model
 
         $img = Image::make($url);
             
-        // $img->fit(180, 180, function ($constraint) {
-        //     $constraint->aspectRatio();
-        // });
-
-        $img->resize(300);
+        $img->resize(300, null, function ($constraint) {
+            $constraint->aspectRatio();
+        });
 
         $urlThumbnail = 'product/category/thumbnail/' . $value;
 

@@ -36,6 +36,7 @@
 
         <div class="container">
             <div class="row">
+
                 <div class="col-lg-12 text-center">
                     <h1 class="section-heading">Pics</h1>
                     <h2 class="section-subheading text-muted">You`ll find here previews of my newst sets.</h2>
@@ -54,7 +55,7 @@
                           </div>
                         </div>
                         <div class="clearfix"></div>
-                        </div>
+                        <br>
                         <h3>{{ $category->title }}</h3>
                     </a>
                     </div>
@@ -88,7 +89,7 @@
     <section id="contact" class="content content-section text-center">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
+            <div id="textcontact" class="col-lg-8 col-lg-offset-2">
                 <h2>Contact Krito</h2>
                 <p>{!! $settings->contact !!}</p>
             </div>
