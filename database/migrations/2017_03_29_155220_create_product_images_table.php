@@ -14,6 +14,7 @@ class CreateProductImagesTable extends Migration
     public function up()
     {
         Schema::create('product_images', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->string('url');

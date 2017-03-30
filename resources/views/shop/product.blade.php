@@ -1,4 +1,4 @@
-@extends('layout.basek')
+@extends('layouts.base')
 
 @section('head')
     <title>Krito - Shop</title>
@@ -6,7 +6,7 @@
     <meta name='description' content='Kontrol'>
     <meta name='keywords' content='palabras, clave'>
     <meta name='robots' content='noindex,nofollow'>
-    <link href="{{ asset('/css/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('krito/css/shop.css') }}" rel="stylesheet">
 @stop
 
 @section('container')
@@ -29,12 +29,12 @@
                     @endif
                 </div>
                 <div class="col-md-6 text-left">
-                    <h1 class="page-header">{{$product->desc}}</h1>
+                    <h1 class="page-header">{{$product->title}}</h1>
                     <h1>${{$product->price}}</h1>
                     <br>
-                    <a class="btn btn-default" href="{{route('cart-add', $product->id)}}"><i class="icon-shopping-cart icon-white"></i>ADD TO CART</a>
+                    <a class="btn btn-default" href="{{route('cart.add', $product->id)}}"><i class="icon-shopping-cart icon-white"></i>ADD TO CART</a>
                     <hr>
-                    <p>{{$product->desc2}}</p>                    
+                    <p>{!! $product->description !!}</p>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@
 
 
 @section('script')
-    <script src="{{ asset('/js/pinterest_grid.js') }}"></script>
+    <script src="{{ asset('krito/js/pinterest_grid.js') }}"></script>
     
     <script>
 
