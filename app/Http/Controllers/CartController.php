@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Cart;
 use Illuminate\Http\Request;
@@ -9,20 +11,6 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
- //    public function __construct() {
-	// 	if(! \Session::has('cart'))
-	// 	{
-	// 		\Session::put('cart', array());
-	// 	}
-	// }
- //    //Show Cart
- //    public function show()
- //    {
- //    	$cart = \Session::get('cart');
- //   		$total = $this->total();
- //    	return view('cart.show', compact('cart', 'total'));
- //    }
-
     public function show()
     {
         // dd(Cart::content());
@@ -56,26 +44,10 @@ class CartController extends Controller
         Cart::update($id, $request->input('qty'));
         return back();
     }
-    
-    // //Total
-    // private function total()
-    // {
-    // 	$cart = \Session::get('cart');
-    // 	$total = 0;
-    // 	foreach ($cart as $item) {
-    // 		$total += $item->price * $item->quantity;
-    // 	}
-    // 	return $total;
-    // }
 
     public function detail()
     {
         return view('cart.detail');
-        // $cart = \Session::get('cart');
-        // if (count($cart) <= 0) 
-        //     return redirect()->route('home');
-        // $total = $this->total();    
-        // return view('cart.detail', compact('cart', 'total'));
     }
 
     public function order(Request $request)
@@ -84,20 +56,12 @@ class CartController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-        ]);
-        
+        ]);        
 
         $name = $request->input('name');
         $email = $request->input('email');
         $address = $request->input('address');
         $phone = $request->input('phone');
-
-        //     $subtotal = 0;
-        //     $cart = \Session::get('cart');
-
-        //     foreach ($cart as $item) {
-        //         $subtotal += $item->price * $item->quantity; 
-        //     }
 
         $newOrder = new Order;
         $newOrder->subtotal = Cart::total();
@@ -113,12 +77,13 @@ class CartController extends Controller
         Cart::destroy();
         
         Session::flash('message', 'su pedido ya fue cargado, uds sera contactado por krito');
-        return back();
+        return redirect()->route('index');
     }
 
     public function saveOrderItem($order)
     {
-        foreach ($Cart::content() as $item) {
+        //Ver cuando falla aca EJ: $cart
+        foreach (Cart::content() as $item) {
             $newOrderItem = new OrderItem;
             $newOrderItem->order_id = $order->id;
             $newOrderItem->price = $item->id;
