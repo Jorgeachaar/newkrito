@@ -17,9 +17,9 @@ class CreateProductImagesTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->string('url');
-            $table->string('desc');            
-            $table->integer('orden');            
+            $table->string('image');
+            $table->string('description');            
+            $table->integer('position');            
             $table->timestamps();
 
             $table->foreign('product_id')

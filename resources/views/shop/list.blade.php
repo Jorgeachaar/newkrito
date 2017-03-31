@@ -13,15 +13,15 @@
 @section('container')
 	<section id="albumregister" class="content-section text-center">
 		<div class="container">
-			<h1 class="page-header">Shop - {{ $category->desc }}</h1>
+			<h1 class="page-header">Shop - {{ $category->title }}</h1>
 	        <div class="row text-center">
 	        	<section id="product">
 		        	@foreach ($category->products as $product)
 		                <article class="white-panel"> 
 		                	@if (count($product->Images)>0)
-			                	<img src="{{ asset('img/products/thumb_'.$product->Images->first()->url) }}" alt="">
+			                	<img src="{{ asset($product->Images->first()->url_image) }}" alt="">
 		                	@endif
-							<h1><a href="#">{{$product->desc}}</a></h1>
+							<h1><a href="#">{{$product->title}}</a></h1>
 			                <p>${{$product->price}}</p>
 			                <p>
 			                	<a href="{{route('cart.add', $product->id)}}" class="btn btn-primary">ADD TO CART</a>

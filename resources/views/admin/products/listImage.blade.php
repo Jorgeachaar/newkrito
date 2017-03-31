@@ -1,14 +1,13 @@
 @extends('layouts.admin.base')
 
-@section('title_page_header', 'Imagenes para Categorias: ' . $category->title)
+@section('title_page_header', 'Imagenes para el producto: ' . $product->title)
 
-@section('description_page_header', 'lista de categoría de imágenes')
+@section('description_page_header', 'lista del producto de imágenes')
 
 @section('content')
 
-    {!! Form::open(['method' => 'POST', 'route' => 'picCategories.images.store', 'enctype'=>'multipart/form-data']) !!}
+    {!! Form::open(['method' => 'POST', 'route' => ['product.images.store', $product->id], 'enctype'=>'multipart/form-data']) !!}
 
-      {!! Form::hidden('pic_category_id', $category->id)!!}
       {!! Form::file('image[]', array('multiple'=>true)) !!}
 
       <div class="box-footer">
@@ -20,7 +19,7 @@
     <h3>Lista de imagenes</h3>
     
     <div class="row" style="margin-left: 10px">
-      @foreach ($category->images as $image)
+      @foreach ($product->images as $image)
         <div class="pull-left">
           <div class="thumbnail">
             <img src="{{ $image->url_thumbnail_image }}" alt="">

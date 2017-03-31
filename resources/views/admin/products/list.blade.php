@@ -36,12 +36,12 @@
                   <td>{{ $item->title }}</td>
                   <td>{{ $item->price }}</td>
                   <td>
-                    <a href="{{ route('productCategory.edit', $item->id) }}" class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> update</a>
+                    <a href="{{ route('products.edit', $item->id) }}" class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> update</a>
                     <a 
-                      href="{{ route('productCategory.destroy', $item->id) }}" 
+                      href="{{ route('products.destroy', $item->id) }}" 
                       class="btn btn-danger btn-sm pull-left"
                       onclick="event.preventDefault();
-                                if (confirm('Esta seguro de eliminar la categoria {{ $item->title }}?')) {
+                                if (confirm('Esta seguro de eliminar el producto {{ $item->title }}?')) {
                                   document.getElementById('destroy-form-{{ $item->id }}').submit();
                                 } else {
                                 }"
@@ -49,9 +49,9 @@
                       <i class="fa  fa-trash"></i> 
                       delete
                     </a>
-                    {{ Form::open(array('route' => array('productCategory.destroy', $item->id), 'method' => 'delete', 'id'=>'destroy-form-'. $item->id)) }}                       
+                    {{ Form::open(array('route' => array('products.destroy', $item->id), 'method' => 'delete', 'id'=>'destroy-form-'. $item->id)) }}                       
                     {{ Form::close() }}
-                    <a href="{{ route('productCategory.edit', $item->id) }}" class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> update</a>
+                    <a href="{{ route('product.images.add', $item->id) }}" class="btn btn-success btn-sm pull-left"><i class="fa fa-image"></i>imagenes</a>
                     
                   </td>
                 </tr>  

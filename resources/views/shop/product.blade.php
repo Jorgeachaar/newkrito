@@ -15,13 +15,13 @@
             <div class="row">
                 <div class="col-md-6">
                     @if ($product->Images->count() > 0)
-                        <img src="{{ asset('img/products/'.$product->Images->first()->url) }}" class="img-responsive fleximg" alt="" id="imgport">
+                        <img src="{{ asset($product->Images->first()->url_image) }}" class="img-responsive fleximg" alt="" id="imgport">
                         <br>
                         @if (count($product->Images)> 1)
                             @foreach ($product->Images as $img)
                                 <div class="col-md-3">
-                                    <a href="#" class="thumbimg" data-url="{{ asset('img/products/'.$img->url) }}">
-                                        <img src="{{ asset('img/products/thumb_'.$img->url) }}" class="img-responsive fleximg" alt="" >
+                                    <a href="#" class="thumbimg" data-url="{{ asset($img->url_image) }}">
+                                        <img src="{{ asset($img->url_image) }}" class="img-responsive fleximg" alt="" >
                                     </a>
                                 </div>
                             @endforeach                        

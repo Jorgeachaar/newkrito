@@ -29,6 +29,7 @@
                             </div>
                             </div>
                         </a>
+                        <br>
                         <h3>{{$category->title}}</h3>                   
                     </div>
                 @endforeach

@@ -7,7 +7,7 @@
 @if (isset($item))
 	@section('title_page_header', 'Editar producto: ' .$item->description)
 @else
-	@section('title_page_header', 'Nueva producto');
+	@section('title_page_header', 'Nuevo producto');
 @endif
 
 {{-- @section('description_page_header', 'panel de administración') --}}
@@ -24,7 +24,7 @@
 				{!! Form::hidden('product_category_id', $category->id) !!}
 	 			{!! Field::text('title') !!}
 	 			{!! Field::textarea('description', ['class'=>'textarea']) !!}
-				{!! Field::number('price') !!}
+				{!! Field::number('price', ['step' =>'0.01']) !!}
 			</div>
 
 			<div class="box-footer">
