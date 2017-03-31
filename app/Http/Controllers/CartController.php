@@ -21,46 +21,40 @@ class CartController extends Controller
  //   		$total = $this->total();
  //    	return view('cart.show', compact('cart', 'total'));
  //    }
+
+    public function show()
+    {
+        // dd(Cart::content());
+        return view('cart.show');
+    }
     
-    //Add item
     public function add($id)
     {
     	$product = Product::findOrFail($id);
     	Cart::add($product->id, $product->title, 1, $product->price);
-    	return back();
-    	// $product = Product::findOrFail($id);
-    	// $cart = \Session::get('cart');
-    	// $product->quantity = 1;
-    	// $cart[$product->id] = $product;
-    	// \Session::put('cart', $cart);
-    	// return redirect()->route('cart-show');
+    	return back();;
     }
     
-    // //Delete item
-    // public function delete($id)
-    // {
-    // 	$product = Product::findOrFail($id);
-    // 	$cart = \Session::get('cart');
-    // 	unset($cart[$product->id]);
-    // 	\Session::put('cart', $cart);
-    // 	return redirect()->route('cart-show');
-    // }
+    public function delete($id)
+    {
+        Cart::remove($id);
+    	return back();
+    }
 
-    // //Trash cart
-    // public function trash()
-    // {
-    // 	\Session::forget('cart');
-    // 	return redirect()->route('cart-show');
-    // }
+    public function trash()
+    {
+    	Cart::destroy();
+        return back();
+    }
     
-    // //Update Item
-    // public function update($id, $quantity)
-    // {
-    // 	$cart = \Session::get('cart');
-    // 	$cart[$id]->quantity = $quantity;
-    // 	\Session::put('cart', $cart);
-    // 	return redirect()->route('cart-show');
-    // }
+    public function update(Request $request, $id)
+    {
+        // $this->validate($request, [
+
+        // ]);
+        Cart::update($id, $request->input('qty'));
+        return back();
+    }
     
     // //Total
     // private function total()

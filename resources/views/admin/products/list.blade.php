@@ -49,7 +49,7 @@
                       <i class="fa  fa-trash"></i> 
                       delete
                     </a>
-                    {{ Form::open(array('route' => array('products.destroy', $item->id), 'method' => 'delete', 'id'=>'destroy-form-'. $item->id)) }}                       
+                    {{ Form::open(array('route' => array('products.destroy', $item->id), 'method' => 'delete', 'id'=>'destroy-form-'. $item->id)) }}
                     {{ Form::close() }}
                     <a href="{{ route('product.images.add', $item->id) }}" class="btn btn-success btn-sm pull-left"><i class="fa fa-image"></i>imagenes</a>
                     

@@ -10,8 +10,8 @@ NUEVPS
 CUAndo elimina una categoria validar que no sea de otra
 CAtegoria cuadno se elimina eliminar imagenes
 en combo de las categoria cuando se modifica que no aparezca su propia categoria
-
-
+Agragar al carrito por Ajax
+Validar la cantidad cuando cambia la cantidad de un producto en el carrito
 
 LINKS
 
