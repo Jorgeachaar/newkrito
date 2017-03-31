@@ -66,19 +66,8 @@
 					                      
 					                    </a>
 					                    {{ Form::close() }}
-										
-										{{-- <a 
-											href="#" 
-											class="btn btn-warning btn-update-item"
-											data-href="{{ route('cart.update', $item->rowId) }}"
-											data-href="#"
-											data-id="{{ $item->id }}"
-										>
-											<i class="fa fa-refresh"></i>
-
-										</a>	 --}}									
 									</th>
-									<th>{{number_format($item->total, 2)}}</th>
+									<th>$ {{ $item->total }}</th>
 									<th>
 										<a href="{{ route('cart.delete', $item->rowId) }}" class="btn btn-danger"><i class="fa fa-remove"></i></a>
 									</th>
@@ -88,14 +77,13 @@
 					</table>
 					<h3>
 						<span class="label label-success">
-							TOTAL: ${{ number_format(Cart::total(), 2) }}
+							TOTAL: $ {{ Cart::total() }}
 						</span>
 					</h3>
 				</div>
 				<hr>
 				<p>
-					<a href="#" class="btn btn-warning">CHECK OUT</a>
-					{{-- <a href="{{ route('cart-detail') }}" class="btn btn-warning">CHECK OUT</a> --}}
+					<a href="{{ route('cart.detail') }}" class="btn btn-warning">CHECK OUT</a>
 				</p>
 			@else
 				<hr>

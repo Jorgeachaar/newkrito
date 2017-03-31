@@ -26,5 +26,5 @@ Route::name('cart.add')->get('cart/add/{id}', 'CartController@add');
 Route::name('cart.delete')->get('cart/delete/{id}', 'CartController@delete');
 Route::name('cart.trash')->get('cart/trash', 'CartController@trash');
 Route::name('cart.update')->post('cart/update/{id}', 'CartController@update');
-// Route::name('cart.detail')->get('cart/detail', 'CartController@detail');
-// Route::name('cart.order')->get('cart/order', 'CartController@order');
+Route::name('cart.detail')->get('cart/detail', 'CartController@detail');
+Route::name('cart.order')->post('cart/order', 'CartController@order');

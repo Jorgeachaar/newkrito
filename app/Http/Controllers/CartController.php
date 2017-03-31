@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -67,66 +68,63 @@ class CartController extends Controller
     // 	return $total;
     // }
 
-    // public function detail()
-    // {
-    //     $cart = \Session::get('cart');
-    //     if (count($cart) <= 0) 
-    //         return redirect()->route('home');
-    //     $total = $this->total();    
-    //     return view('cart.detail', compact('cart', 'total'));
-    // }
+    public function detail()
+    {
+        return view('cart.detail');
+        // $cart = \Session::get('cart');
+        // if (count($cart) <= 0) 
+        //     return redirect()->route('home');
+        // $total = $this->total();    
+        // return view('cart.detail', compact('cart', 'total'));
+    }
 
-    // public function order(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'name' => 'required',
-    //         'email' => 'required|email',
-    //         'phone' => 'required',
-    //     ]);
+    public function order(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+        ]);
+        
 
-    //     if ($validator->fails()) {
-    //         return Redirect::back()            
-    //                     ->withErrors($validator)
-    //                     ->withInput();
-    //     }
-    //     else {
-    //         $name = $request->input('name');
-    //         $email = $request->input('email');
-    //         $address = $request->input('address');
-    //         $phone = $request->input('phone');
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $address = $request->input('address');
+        $phone = $request->input('phone');
 
-    //         $subtotal = 0;
-    //         $cart = \Session::get('cart');
+        //     $subtotal = 0;
+        //     $cart = \Session::get('cart');
 
-    //         foreach ($cart as $item) {
-    //             $subtotal += $item->price * $item->quantity; 
-    //         }
+        //     foreach ($cart as $item) {
+        //         $subtotal += $item->price * $item->quantity; 
+        //     }
 
-    //         $order = Order::create([
-    //             'subtotal' => $subtotal,
-    //             'name' => $name,
-    //             'email' => $email,
-    //             'phone' => $phone,
-    //             'address' => $address,
-    //         ]);
+        $newOrder = new Order;
+        $newOrder->subtotal = Cart::total();
+        $newOrder->name = $name;
+        $newOrder->email = $email;
+        $newOrder->phone = $phone;
+        $newOrder->address = $address;
+        $newOrder->save();
 
-    //         foreach ($cart as $product) {
-    //             $this->saveOrderItem($product, $order->id);
-    //         }
+        //VER EL TEMA DEL ATTACH RELACIONES
+        $this->saveOrderItem($newOrder);
 
-    //         \Session::forget('cart');
-    //         return redirect()->route('home')
-    //             ->with('message', 'su pedido ya fue cargado, uds sera contactado por krito');
-    //     }
-    // }
+        Cart::destroy();
+        
+        Session::flash('message', 'su pedido ya fue cargado, uds sera contactado por krito');
+        return back();
+    }
 
-    // public function saveOrderItem($product, $order_id)
-    // {
-    //     OrderItem::create([
-    //         'price' => $product->price,
-    //         'quantity' => $product->quantity,
-    //         'product_id' => $product->id,
-    //         'order_id' => $order_id,
-    //     ]);
-    // }
+    public function saveOrderItem($order)
+    {
+        foreach ($Cart::content() as $item) {
+            $newOrderItem = new OrderItem;
+            $newOrderItem->order_id = $order->id;
+            $newOrderItem->price = $item->id;
+            $newOrderItem->product_id = $item->id;
+            $newOrderItem->qty = $item->id;
+            $newOrderItem->save();
+        }
+    }
 }

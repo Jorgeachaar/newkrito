@@ -1,4 +1,4 @@
-@extends('layout.basek')
+@extends('layouts.base')
 
 @section('head')
     <title>Krito</title>
@@ -28,12 +28,9 @@
 					</table> --}}
 				</div>
 
+	@include('partials.errors')
 
-
-
-@include('partial.errors')
-
-	{!!Form::open(['route'=>'cart-order', 'method'=>'POST', 'class'=>'form-horizontal'])!!}
+	{!!Form::open(['route'=>'cart.order', 'method'=>'POST', 'class'=>'form-horizontal'])!!}
 
 		<div class="form-group">
 			{!!Form::label('Name','Name:', array('class'=>'col-sm-2 control-label'))!!}
@@ -60,10 +57,6 @@
 			</div>
 		</div>
 
-
-
-
-
 				<div class="table-responsive">
 					<h3>Order summary</h3>
 					<table class="table table-striped table-hover table-bordered">
@@ -73,22 +66,22 @@
 							<th>Cantidad</th>
 							<th>SubTotal</th>
 						</tr>
-						@foreach ($cart as $item)
+						@foreach (Cart::content() as $item)
 							<tr>
-								<td>{{ $item->desc }}</td>
-								<td>${{ number_format($item->price, 2)  }}</td>
-								<td>{{ $item->quantity }}</td>
-								<td>${{ number_format($item->price * $item->quantity, 2) }}</td>
+								<td>{{ $item->name }}</td>
+								<td>$ {{ $item->price  }}</td>
+								<td>{{ $item->qty }}</td>
+								<td>$ {{ $item->total }}</td>
 							</tr>
 						@endforeach
 					</table>
 					<hr>
 					<h3><span class="label label-warning">
-						TOTAL: $ {{ number_format($total, 2)  }}
+						TOTAL: $ {{ Cart::total()  }}
 					</span></h3>
 					<hr>
 					<p>
-						<a href="{{ route('cart-show') }}" class="btn btn-primary">Return to cart</a>
+						<a href="{{ route('cart.show') }}" class="btn btn-primary">Return to cart</a>
 						{!!Form::submit('CONTINUE',['class'=>'btn btn-success'])!!}
 					</p>
 				</div>
