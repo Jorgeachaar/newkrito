@@ -2,6 +2,7 @@
 // Route::get('/home', 'HomeController@index');
 
 Route::get('/imagenes', 'ImageController@index');
+Route::post('/imagenes', 'ImageController@store2')->name('image');
 
 Route::name('index')->get('/', 'HomeController@index');
 
