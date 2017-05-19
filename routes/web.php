@@ -1,6 +1,8 @@
 <?php
 // Route::get('/home', 'HomeController@index');
 
+Route::get('/imagenes', 'ImageController@index');
+
 Route::name('index')->get('/', 'HomeController@index');
 
 Route::name('contact')->post('/', 'HomeController@sendContact');
