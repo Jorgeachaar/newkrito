@@ -28,16 +28,16 @@ class ImageController extends Controller
 
 	public function store2(Request $request)
 	{
-		$canva = $img = Image::canvas(442, 473);
+		$canva = $img = Image::canvas(442, 473); //'#4318EE'
 		$marco = Image::make(public_path() . '/Krito/img/asd/marco.png');
 		$mask  = Image::make(public_path() . '/Krito/img/asd/mask2.png');
 		// $img   = Image::make(public_path() . '/Krito/img/logo.png');
 		$img   = Image::make($request->file('image'));
 		
-		$img->fit(298, 302);
+		$img->fit(312, 316);
 		$img->mask($mask, true);
 
-		$canva->insert($img, 'center', 0, 80);
+		$canva->insert($img, 'top-left', 67, 114);
 		$canva->insert($marco, 'center');
 
 		return $canva->response('png');
