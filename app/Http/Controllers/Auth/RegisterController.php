@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
@@ -51,6 +53,7 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'plan' => 'required|in:1,2,3',
         ]);
     }
 
@@ -62,10 +65,46 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        DB::beginTransaction();
+        try {
+            $user = User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+            ]);
+
+            switch ($data['plan']) {
+                case '1':
+                    $years = 1;
+                    break;
+                case '2':
+                    $years = 2;
+                    break;
+                case '3':
+                    $years = 5;
+                    break;
+                default:
+                    $years = 0;
+                    break;
+            }
+
+            $end_plan = Carbon::now()->addYears(1);
+
+
+
+            $user->profile()->create([
+                'user_id' => $user->id,
+                'plan' => $data['plan'],
+                'start_plan' => Carbon::now(),
+                'end_plan' => Carbon::now()->addYears($years),
+            ]);
+
+            DB::commit();
+            
+        } catch (Exception $e) {
+            DB::rollBack();
+        }
+
+        return $user;
     }
 }

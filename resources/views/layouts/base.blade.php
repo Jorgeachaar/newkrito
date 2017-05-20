@@ -109,7 +109,10 @@ if (Auth::check()) $classcheck ="";
                     </li>
                     <?php if (!Auth::check()){ ?>
                     <li>
-                        <a href="{{ route('login') }}" id="verbtnLogin" ><span class="fa fa-user fa-1x"></span> Members</a><!-- data-toggle="modal" data-target="#exampleModal" -->
+                        <a href="{{ route('register') }}" id="verbtnLogin" >Register</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('login') }}" id="verbtnLogin" ><span class="fa fa-user fa-1x"></span> Login</a><!-- data-toggle="modal" data-target="#exampleModal" -->
                     </li>
                     <?php } else {?>
                         <li class="dropdown">

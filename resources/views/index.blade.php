@@ -43,20 +43,22 @@
                 </div>
 
                 @foreach ($mainCategories as $category)
-                    <div class="col-lg-4 col-sm-6 text-center ">
+                    <div class="col-md-4 text-center" style="padding: 50px">
                     <a href="{{ route('pic.category', [$category, $category->slug]) }}">
                         <div id="f1_container">
-                        <div id="f1_card" class="shadow">
-                          <div class="front face">
-                            <img src="{{ $category->url_thumbnail_image }}">
-                          </div>
-                          <div class="back face">
-                            <img src="{{ $category->url_thumbnail_image2 }}">
-                          </div>
+                            <div id="f1_card" class="shadow">
+                              <div class="front face">
+                                <img src="{{ $category->url_thumbnail_image }}">
+                              </div>
+                              <div class="back face">
+                                <img src="{{ $category->url_thumbnail_image2 }}">
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br>
+                            <br>
+                            <h3>{{ $category->title }}</h3>
                         </div>
-                        <div class="clearfix"></div>
-                        <br>
-                        <h3>{{ $category->title }}</h3>
                     </a>
                     </div>
                 @endforeach

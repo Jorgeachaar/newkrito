@@ -28,10 +28,15 @@ class ImageController extends Controller
 
 	public function store2(Request $request)
 	{
+		// C:\Users\Ercilia\Desktop\Fotos de Henry\img\tattoos\henry\FullColor
+		$border_type = $request->input('border_type');
 		$canva = $img = Image::canvas(442, 473); //'#4318EE'
-		$marco = Image::make(public_path() . '/Krito/img/asd/marco.png');
+		if ($border_type == "1") {
+			$marco = Image::make(public_path() . '/Krito/img/asd/marco.png');
+		} else {
+			$marco = Image::make(public_path() . '/Krito/img/asd/marco2.png');
+		}
 		$mask  = Image::make(public_path() . '/Krito/img/asd/mask2.png');
-		// $img   = Image::make(public_path() . '/Krito/img/logo.png');
 		$img   = Image::make($request->file('image'));
 		
 		$img->fit(312, 316);
