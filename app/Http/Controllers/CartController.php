@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewOrder;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -75,6 +77,9 @@ class CartController extends Controller
         $this->saveOrderItem($newOrder);
 
         Cart::destroy();
+
+        Mail::to('henryanglas@hotmail.com', 'Henry Anglas')
+            ->send(new NewOrder($newOrder));
         
         Session::flash('message', 'su pedido ya fue cargado, uds sera contactado por krito');
         return redirect()->route('index');
@@ -86,9 +91,9 @@ class CartController extends Controller
         foreach (Cart::content() as $item) {
             $newOrderItem = new OrderItem;
             $newOrderItem->order_id = $order->id;
-            $newOrderItem->price = $item->id;
+            $newOrderItem->price = $item->price;
             $newOrderItem->product_id = $item->id;
-            $newOrderItem->qty = $item->id;
+            $newOrderItem->qty = $item->qty;
             $newOrderItem->save();
         }
     }

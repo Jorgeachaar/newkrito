@@ -23,11 +23,6 @@ class Contact extends Mailable
         $this->text = $message;        
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->view('emails.contact')

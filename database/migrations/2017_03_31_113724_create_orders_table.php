@@ -20,7 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('address')->nullable();
-            $table->decimal('subtotal',5,2);
+            $table->float('subtotal', 8, 2);
             $table->enum('status', ['new', 'old'])->default('new');
             $table->timestamps();
         });
