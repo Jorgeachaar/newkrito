@@ -20,6 +20,8 @@ class CreateProductCategoriesTable extends Migration
             $table->string('image');
             $table->string('image2');
             $table->integer('position');
+            $table->unsignedInteger('product_category_id')->nullable();
+            $table->foreign('product_category_id')->references('id')->on('product_categories');
             $table->timestamps();
         });
     }

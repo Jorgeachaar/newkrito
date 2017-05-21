@@ -17,7 +17,8 @@
 			{!! Form::open(['method' => 'POST', 'route' => 'productCategory.store', 'enctype'=>'multipart/form-data']) !!}
 		@endif
 			<div class="box-body">
-	 			{!! Field::text('title') !!}				
+	 			{!! Field::text('title') !!}
+	 			{!! Form::select('product_category_id', $categories, null, ['class' => 'form-control'])!!}	
 				@if (isset($item))
 					{!! Field::number('position') !!}
 				@endif

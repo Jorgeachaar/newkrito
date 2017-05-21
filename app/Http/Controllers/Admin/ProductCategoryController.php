@@ -16,7 +16,8 @@ class ProductCategoryController extends Controller
 
     public function create()
     {
-        return view('admin.productCategory.form');
+        $categories = $this->getCategoriesForCombo();
+        return view('admin.productCategory.form', compact('categories'));
     }
 
     public function store(Request $request)
@@ -48,8 +49,9 @@ class ProductCategoryController extends Controller
 
     public function edit(ProductCategory $productCategory)
     {
+        $categories = $this->getCategoriesForCombo();
         $item = $productCategory;
-        return view('admin.productCategory.form', compact('item'));
+        return view('admin.productCategory.form', compact('item', 'categories'));
     }
 
     public function update(Request $request, ProductCategory $productCategory)
@@ -116,5 +118,12 @@ class ProductCategoryController extends Controller
     public function urlList()
     {
         return redirect()->route('productCategory.index');        
+    }
+
+    public function getCategoriesForCombo()
+    {
+        $categories = ProductCategory::pluck('title', 'id'); 
+        $categories->prepend("(Ninguno)", "");
+        return $categories;
     }
 }

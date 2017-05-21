@@ -5,7 +5,7 @@
 @endsection
 
 @if (isset($item))
-	@section('title_page_header', 'Editar producto: ' .$item->description)
+	@section('title_page_header', 'Editar producto: ' .$item->title)
 @else
 	@section('title_page_header', 'Nuevo producto');
 @endif

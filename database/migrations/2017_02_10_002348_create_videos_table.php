@@ -19,9 +19,6 @@ class CreateVideosTable extends Migration
             $table->string("title");
             $table->string("url");
             $table->integer("position");
-            // $table->string("url_youtube");
-            // $table->string("url_vimeo");
-            // $table->string("url_private");
             $table->boolean("premium")->default(false);
             $table->timestamps();
         });
