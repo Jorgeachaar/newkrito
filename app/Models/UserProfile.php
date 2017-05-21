@@ -12,4 +12,9 @@ class UserProfile extends Model
     	'end_plan', 
     	'plan',
     ];
+
+    protected $dates = [
+        'start_plan', 
+        'end_plan'
+    ];
 }

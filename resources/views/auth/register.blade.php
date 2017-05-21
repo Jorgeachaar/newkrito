@@ -65,11 +65,11 @@
                                 <label for="result" class="col-md-4 control-label"></label>
                                 <div class="col-md-6 pull-left">
                                     {{ Form::radio('plan', '1' , true) }}
-                                    1 Moth $25
+                                    1 Year $25
                                     {{ Form::radio('plan', '2' , false) }}
-                                    2 Moth $45
+                                    2 Years $45
                                     {{ Form::radio('plan', '3' , false) }}
-                                    5 Moth $95
+                                    5 Years $95
                                 </div>
                             </div>
 
