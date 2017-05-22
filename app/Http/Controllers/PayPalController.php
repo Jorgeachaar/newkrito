@@ -19,9 +19,14 @@ use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 
-//USUARUI De PRUEBA
+//USUARIO De PRUEBA
 // jorgeachaar-buyer@gmail.com
 // secret321
+
+// PAYPAL_CLIENT_ID=AV2eEMCSovZTGM0IpWbA8hSYIzwSDHGjrVUMH5D80vnWqNOm2vjV2ezI9Aj5lPyuieqdhUMKMppf4S2y
+// PAYPAL_APP_SECRET=EHlTkjaMiskiYlDMRGpzIdjd4cUA0U0XVMvL8wT5Hh6Yunku9XwC1BvQDWObQnovzetKTXRuiF4Z71PQ
+// PAYPAL_MODE=sandbox
+
 class PayPalController extends Controller
 {
 	private $_api_context;
