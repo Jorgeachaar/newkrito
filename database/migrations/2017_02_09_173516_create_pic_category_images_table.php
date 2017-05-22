@@ -20,7 +20,7 @@ class CreatePicCategoryImagesTable extends Migration
             $table->string('image');
             $table->integer('position');
             $table->unsignedInteger('pic_category_id');
-            $table->foreign('pic_category_id')->references('id')->on('pic_categories');
+            $table->foreign('pic_category_id')->references('id')->on('pic_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

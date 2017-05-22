@@ -122,7 +122,13 @@ class PicCategoryController extends Controller
 
     public function destroy(PicCategory $category)
     {
+        $folderPath = 'pics/' . $category->id;
+        if (Storage::disk('public')->exists($folderPath)) {
+            Storage::disk('public')->deleteDirectory($folderPath);
+        }
+
         $category->delete();
+
         return $this->urlList();
     }
 
