@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PicCategory;
 use App\Models\PicCategoryImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Image;
 
@@ -26,23 +27,51 @@ class PicCategoryController extends Controller
 
     public function store(Request $request)
     {
-        $this->doValidate($request);
+        DB::beginTransaction();
+        try {
 
-        $item = new PicCategory;
+            $this->doValidate($request);
 
-        $item->fill($request->all());
+            $item = new PicCategory;
 
-        if ($request->file('image'))
-            $item->image = $request->file('image')->store('pic/category', 'public');
+            $item->fill($request->all());
+            $maxPosition = PicCategory::max('position');
+            $item->position = $maxPosition ? ++$maxPosition : 1;
+            $item->image = "xxx";
+            $item->image2 = "xxx";
+            $item->save();
 
-        if ($request->file('image2'))
-            $item->image2 = $request->file('image2')->store('pic/category', 'public');
+            if ($request->file('image')) {
+                $storagePath  = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix();
+                $item->image = str_replace('pics/' . $item->id . "/", "", $request->file('image')->store('pics/' . $item->id , 'public'));
+                $img = Image::make($storagePath . '/pics/' . $item->id . "/" . $item->image);
+                $img->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $urlThumbnail = 'pics/'. $item->id .'/thumbnail/' . $item->image;
+                Storage::disk('public')->put($urlThumbnail, (string) $img->encode()); 
+            }
 
-        $maxPosition = PicCategory::max('position');
-        $item->position = $maxPosition ? ++$maxPosition : 1;
+            if ($request->file('image2')) {
+                $storagePath  = Storage::disk('public')->getDriver()->getAdapter()->getPathPrefix();
+                $item->image2 = str_replace('pics/' . $item->id . "/", "", $request->file('image2')->store('pics/' . $item->id , 'public'));
+                $img = Image::make($storagePath . '/pics/' . $item->id . "/" . $item->image2);
+                $img->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $urlThumbnail = 'pics/'. $item->id .'/thumbnail/' . $item->image2;
+                Storage::disk('public')->put($urlThumbnail, (string) $img->encode());  
+            }
 
-        $item->save();
+            $item->save();
 
+
+            DB::commit();
+            
+        } catch (Exception $e) {
+            DB::rollBack();
+        }
+        
         return $this->urlList();
     }
 
@@ -71,7 +100,7 @@ class PicCategoryController extends Controller
             $this->validate($request, [
                 'image' => 'image|mimes:jpg,jpeg,png,bmp|max:20000'
             ]);
-            $category->image = $request->file('image')->store('pic/category', 'public');
+            $category->image = $request->file('image')->store('pic/' . $category->id, 'public');
         }
 
         if ($request->file('image2'))
@@ -79,7 +108,7 @@ class PicCategoryController extends Controller
             $this->validate($request, [
                 'image2' => 'image|mimes:jpg,jpeg,png,bmp|max:20000'
             ]);
-            $category->image2 = $request->file('image2')->store('pic/category', 'public');
+            $category->image2 = $request->file('image2')->store('pic/' . $category->id, 'public');
         }
 
         $category->fill($request->all());
@@ -159,7 +188,7 @@ class PicCategoryController extends Controller
 
                 $pic_image->description = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
 
-                $pic_image->image = $image->store('pic/images', 'public');
+                $pic_image->image = str_replace('pics/' . $pic_category_id . "/images/", "", $image->store('pics/' . $pic_category_id . '/images', 'public'));
                 
                 $img = Image::make($image);
                 
@@ -167,7 +196,7 @@ class PicCategoryController extends Controller
                     $constraint->aspectRatio();
                 });
 
-                Storage::disk('public')->put('pic/images/thumbnail/' . $pic_image->image, (string) $img->encode());
+                Storage::disk('public')->put('pics/' . $pic_category_id . '/images/thumbnail/'. $pic_image->image, (string) $img->encode());
 
                 $pic_image->save();
 

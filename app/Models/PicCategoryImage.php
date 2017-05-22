@@ -19,11 +19,11 @@ class PicCategoryImage extends Model
 
     public function getUrlThumbnailImageAttribute()
     {
-        return asset('storage/pic/images/thumbnail/' . $this->image);
+        return asset('storage/pics/' . $this->pic_category_id . '/images/thumbnail/' . $this->image);
     }
 
     public function getUrlImageAttribute()
     {
-        return asset('storage/' . $this->image);
+        return asset('storage/pics/' . $this->pic_category_id . '/images/' . $this->image);
     }
 }

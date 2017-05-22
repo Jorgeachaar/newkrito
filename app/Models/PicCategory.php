@@ -60,7 +60,7 @@ class PicCategory extends Model
         if($this->image)
             $this->deleteImage($this->image);
         $this->attributes['image'] = $value;
-        $this->saveThumbnail($value);        
+        //$this->saveThumbnail($value);        
     }
 
     public function setImage2Attribute($value)
@@ -68,27 +68,27 @@ class PicCategory extends Model
         if($this->image2)
             $this->deleteImage($this->image2);
         $this->attributes['image2'] = $value;
-        $this->saveThumbnail($value);        
+        //$this->saveThumbnail($value);        
     }
 
     public function getUrlThumbnailImageAttribute()
     {
-        return asset('storage/pic/category/thumbnail/' . $this->image);
+        return asset('storage/pics/' . $this->id . '/thumbnail/' . $this->image);
     }
 
     public function getUrlImageAttribute()
     {
-        return asset('storage/' . $this->image);
+        return asset('storage/pics/' . $this->id . '/' . $this->image);
     }
 
     public function getUrlThumbnailImage2Attribute()
     {
-        return asset('storage/pic/category/thumbnail/' . $this->image2);
+        return asset('storage/pics/' . $this->id . '/thumbnail/' . $this->image2);
     }
 
     public function getUrlImage2Attribute()
     {
-        return asset('storage/' . $this->image2);
+        return asset('storage/pics/' . $this->id . '/' . $this->image2);
     }
 
     public function saveThumbnail($value)
@@ -117,13 +117,13 @@ class PicCategory extends Model
     {
         if (isset($value) && !empty($value)) {
 
-            $path = 'storage/' . $value;
+            $path = 'storage/pics/' . $this->id . '/' . $value;
 
             if (File::exists($path)) {
                 File::delete($path);
             }
 
-            $path = 'storage/pic/category/thumbnail/' . $value;
+            $path = 'storage/pics/' . $this->id . '/thumbnail/' . $value;
 
             if (File::exists($path)) {
                 File::delete($path);
