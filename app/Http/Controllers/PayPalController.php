@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Cart;
+
 use PayPal\Rest\ApiContext;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Amount;
@@ -17,6 +19,9 @@ use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 
+//USUARUI De PRUEBA
+// jorgeachaar-buyer@gmail.com
+// secret321
 class PayPalController extends Controller
 {
 	private $_api_context;
@@ -39,27 +44,17 @@ class PayPalController extends Controller
 		$cart = \Session::get('cart');
 		$currency = 'EUR';
  
-		// foreach($cart as $producto){
-		// 	$item = new Item();
-		// 	$item->setName($producto->name)
-		// 	->setCurrency($currency)
-		// 	->setDescription($producto->extract)
-		// 	->setQuantity($producto->quantity)
-		// 	->setPrice($producto->price);
- 
-		// 	$items[] = $item;
-		// 	$subtotal += $producto->quantity * $producto->price;
-		// }
-
+		foreach (Cart::content() as $product) {
 			$item = new Item();
-			$item->setName($producto->name)
+			$item->setName($product->name)
 			->setCurrency($currency)
-			->setDescription($producto->extract)
-			->setQuantity($producto->quantity)
-			->setPrice($producto->price);
+			->setDescription($product->name)
+			->setQuantity($product->qty)
+			->setPrice($product->price);
  
 			$items[] = $item;
-			$subtotal += $producto->quantity * $producto->price;
+			$subtotal += $product->qty * $product->price;
+		}
  
 		$item_list = new ItemList();
 		$item_list->setItems($items);
@@ -119,5 +114,43 @@ class PayPalController extends Controller
  
 		return \Redirect::route('cart-show')
 			->with('message', 'Ups! Error desconocido.');;
+    }
+
+    public function paymentStatus(Request $request)
+    {
+		$payment_id = \Session::get('paypal_payment_id');
+
+		//\Session::forget('paypal_payment_id');
+ 
+		$payerId = $request->input('PayerID');
+		$token = $request->input('token');
+ 
+		if (empty($payerId) || empty($token)) {
+			return \Redirect::route('index')
+				->with('message', 'Hubo un problema al intentar pagar con Paypal');
+		}
+ 
+		$payment = Payment::get($payment_id, $this->_api_context);
+
+ 
+		$execution = new PaymentExecution();
+		$execution->setPayerId($payerId);
+ 
+		$result = $payment->execute($execution, $this->_api_context);
+ 
+		if ($result->getState() == 'approved') {
+ 
+			// $this->saveOrder();
+ 
+ 			Cart::destroy();
+
+			\Session::forget('cart');
+ 
+			return \Redirect::route('index')
+				->with('message', 'Compra realizada de forma correcta');
+		}
+
+		return \Redirect::route('index')
+			->with('message', 'La compra fue cancelada');
     }
 }

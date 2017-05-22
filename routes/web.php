@@ -36,4 +36,4 @@ Route::name('cart.detail')->get('cart/detail', 'CartController@detail');
 Route::name('cart.order')->post('cart/order', 'CartController@order');
 
 Route::name('payment')->get('payment', 'PayPalController@sendPayPal');
-Route::name('payment.status')->get('payment/status', 'PayPalController@PaymentStatus');
+Route::name('payment.status')->get('payment/status', 'PayPalController@paymentStatus');
