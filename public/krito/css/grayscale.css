@@ -585,3 +585,8 @@ section#contact .form-group textarea.form-control {
 #view-post {
     color: #000;
 }
+
+.radio-button-panel p {
+    margin: 0px;
+    padding: 0px;
+}

@@ -62,14 +62,20 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="result" class="col-md-4 control-label"></label>
-                                <div class="col-md-6 pull-left">
-                                    {{ Form::radio('plan', '1' , true) }}
-                                    1 Year $25
-                                    {{ Form::radio('plan', '2' , false) }}
-                                    2 Years $45
-                                    {{ Form::radio('plan', '3' , false) }}
-                                    5 Years $95
+                                <label for="result" class="col-md-4 control-label">Plan</label>
+                                <div class="col-md-6 pull-left radio-button-panel">
+                                    <p>
+                                        {{ Form::radio('plan', '1' , true, ['id' => 'plan1']) }}
+                                        <label for="plan1">1 Year $25</label> 
+                                    </p>
+                                    <p>
+                                        {{ Form::radio('plan', '2' , false, ['id' => 'plan2']) }}
+                                        <label for="plan2">2 Years $45</label> 
+                                    </p>
+                                    <p>
+                                        {{ Form::radio('plan', '3' , false, ['id' => 'plan3']) }}
+                                        <label for="plan3">5 Years $95</label> 
+                                    </p>
                                 </div>
                             </div>
 
