@@ -30,6 +30,8 @@ use PayPal\Rest\ApiContext;
 // PAYPAL_CLIENT_ID=AV2eEMCSovZTGM0IpWbA8hSYIzwSDHGjrVUMH5D80vnWqNOm2vjV2ezI9Aj5lPyuieqdhUMKMppf4S2y
 // PAYPAL_APP_SECRET=EHlTkjaMiskiYlDMRGpzIdjd4cUA0U0XVMvL8wT5Hh6Yunku9XwC1BvQDWObQnovzetKTXRuiF4Z71PQ
 // PAYPAL_MODE=sandbox
+// http://paypal.github.io/PayPal-PHP-SDK/
+// http://paypal.github.io/PayPal-PHP-SDK/sample/
 
 class PayPalController extends Controller
 {
@@ -228,11 +230,9 @@ class PayPalController extends Controller
 			}
 		}
  
-		// add payment ID to session
 		Session::put('paypal_payment_id', $payment->getId());
  
 		if(isset($redirect_url)) {
-			// redirect to paypal
 			return \Redirect::away($redirect_url);
 		}
  
@@ -340,8 +340,6 @@ class PayPalController extends Controller
 			'address' => '',
 			'subtotal' => $payment->transactions[0]->amount->total,
     	]);
-
-
     }
 
 

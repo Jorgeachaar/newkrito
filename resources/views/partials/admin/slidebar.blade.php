@@ -48,6 +48,7 @@
         <li class=""><a href="{{ route('videos.index') }}"><i class="fa fa-link"></i> <span>Videos</span></a></li>
         <li class=""><a href="{{ route('posts.index') }}"><i class="fa fa-link"></i> <span>Post</span></a></li>
         <li class=""><a href="{{ route('productCategory.index') }}"><i class="fa fa-link"></i> <span>Products</span></a></li>
+        <li class=""><a href="{{ route('orders.index') }}"><i class="fa fa-link"></i> <span>Pedidos</span></a></li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>

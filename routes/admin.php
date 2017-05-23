@@ -20,8 +20,9 @@ Route::name('posts.images.store')->post('posts/images/create', 'Admin\PostContro
 Route::name('posts.images.update')->put('posts/images/{postImage}', 'Admin\PostController@updateImage');
 Route::name('posts.images.destroy')->delete('posts/images/{postImage}', 'Admin\PostController@destroyImage');
 
-
 Route::resource('productCategory', 'Admin\ProductCategoryController');
 Route::resource('products', 'Admin\ProductController');
 Route::name('product.images.add')->get('products/{product}/images', 'Admin\ProductController@AddImages');
 Route::name('product.images.store')->post('products/{product}/images', 'Admin\ProductController@StoreImages');
+
+Route::resource('orders', 'Admin\OrderController');
