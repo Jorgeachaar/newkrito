@@ -16,10 +16,10 @@ class CreateOrderItemsTable extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->float('price',8,2);
-            $table->integer('qty')->unsigned();
             $table->integer('order_id')->unsigned();
             $table->integer('product_id')->unsigned();
+            $table->float('price',8,2);
+            $table->integer('qty')->unsigned();
 
             $table->foreign('product_id')
                 ->references('id')

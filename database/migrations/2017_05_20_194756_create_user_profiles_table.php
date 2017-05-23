@@ -14,6 +14,7 @@ class CreateUserProfilesTable extends Migration
     public function up()
     {
         Schema::create('user_profiles', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('plan');
@@ -21,7 +22,7 @@ class CreateUserProfilesTable extends Migration
             $table->date('end_plan');
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');// ->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

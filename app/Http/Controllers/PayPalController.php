@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\User;
 use Carbon\Carbon;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -240,39 +242,46 @@ class PayPalController extends Controller
 
     public function paymentRegisterStatus(Request $request)
     {
-    	$payment_id = Session::get('paypal_payment_id');
+    	DB::beginTransaction();
+    	try {
+	    	$payment_id = Session::get('paypal_payment_id');
 
-		Session::forget('paypal_payment_id');
- 
-		$payerId = $request->input('PayerID');
-		$token = $request->input('token');
- 
-		if (empty($payerId) || empty($token)) {
+			// Session::forget('paypal_payment_id');
+	 
+			$payerId = $request->input('PayerID');
+			$token = $request->input('token');
+	 
+			if (empty($payerId) || empty($token)) {
+				return \Redirect::route('index')
+					->with('message', 'Hubo un problema al intentar pagar con Paypal');
+			}
+	 
+			$payment = Payment::get($payment_id, $this->_api_context);
+
+			$execution = new PaymentExecution();
+			$execution->setPayerId($payerId);
+	 
+			$result = $payment->execute($execution, $this->_api_context);
+	 
+			if ($result->getState() == 'approved') {
+	 
+	 			$user = $this->createUser();
+	 			$this->createOrder($user, $payment);
+
+	 			Cart::destroy();
+
+				DB::commit();
+				return \Redirect::route('index')
+					->with('message', 'Logined!!!');
+			}
+
+
 			return \Redirect::route('index')
-				->with('message', 'Hubo un problema al intentar pagar con Paypal');
-		}
- 
-		$payment = Payment::get($payment_id, $this->_api_context);
-
-		$execution = new PaymentExecution();
-		$execution->setPayerId($payerId);
- 
-		$result = $payment->execute($execution, $this->_api_context);
- 
-		if ($result->getState() == 'approved') {
- 
- 			$this->createUser();
-
- 			Cart::destroy();
-
-
-			return \Redirect::route('index')
-				->with('message', 'Logined!!!');
-		}
-
-		return \Redirect::route('index')
-			->with('message', 'Error login');
-    	
+				->with('message', 'Your order not was approved');
+    		
+    	} catch (Exception $e) {
+    		DB::rollBack();
+    	}    	
     }
 
     private function createUser()
@@ -291,6 +300,8 @@ class PayPalController extends Controller
     	$this->createProfile($user, $plan);
         
         Auth::login($user);
+
+        return $user; 
     }
 
     private function createProfile(User $user, $plan)
@@ -316,6 +327,21 @@ class PayPalController extends Controller
             'start_plan' => Carbon::now(),
             'end_plan' => Carbon::now()->addYears($years),
         ]);
+    }
+
+    private function createOrder(User $user, $payment)
+    {
+    	$order = Order::create([
+			'user_id' => $user->id,
+			'cart_paypal' => $payment->cart,
+			'name' => $user->name,
+			'email' => $user->email,
+			'phone' => '',
+			'address' => '',
+			'subtotal' => $payment->transactions[0]->amount->total,
+    	]);
+
+
     }
 
 
