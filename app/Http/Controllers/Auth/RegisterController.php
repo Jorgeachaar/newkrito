@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Cart;
 
 class RegisterController extends Controller
 {
@@ -57,54 +59,79 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
+    public function register(Request $request)
     {
-        DB::beginTransaction();
-        try {
-            $user = User::create([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password']),
-            ]);
+        $this->validator($request->all())->validate();
 
-            switch ($data['plan']) {
-                case '1':
-                    $years = 1;
-                    break;
-                case '2':
-                    $years = 2;
-                    break;
-                case '3':
-                    $years = 5;
-                    break;
-                default:
-                    $years = 0;
-                    break;
-            }
-
-            $end_plan = Carbon::now()->addYears(1);
-
-
-
-            $user->profile()->create([
-                'user_id' => $user->id,
-                'plan' => $data['plan'],
-                'start_plan' => Carbon::now(),
-                'end_plan' => Carbon::now()->addYears($years),
-            ]);
-
-            DB::commit();
-            
-        } catch (Exception $e) {
-            DB::rollBack();
+        $request->session()->put('email_register', $request->input('name'));
+        $request->session()->put('name_register', $request->input('email'));
+        $request->session()->put('pass_register', $request->input('password'));
+        $request->session()->put('plan_register', $request->input('plan'));
+        
+        Cart::destroy();
+        
+        switch ($request->input('plan')) {
+            case '1':
+                Cart::add('plan 1', 'plan 1 for 1 years', 1, 25);
+                $years = 1;
+                break;
+            case '2':
+                Cart::add('plan 2', 'plan 2 for 2 years', 1, 45);
+                $years = 2;
+                break;
+            case '3':
+                Cart::add('plan 3', 'plan 3 for 5 years', 1, 95);
+                $years = 5;
+                break;
+            default:
+                $years = 0;
+                break;
         }
 
-        return $user;
+        return redirect()->route('payment.register');
+        
+    }
+
+    protected function create(array $data)
+    {
+        // DB::beginTransaction();
+        // try {
+        //     $user = User::create([
+        //         'name' => $data['name'],
+        //         'email' => $data['email'],
+        //         'password' => bcrypt($data['password']),
+        //     ]);
+
+        //     switch ($data['plan']) {
+        //         case '1':
+        //             $years = 1;
+        //             break;
+        //         case '2':
+        //             $years = 2;
+        //             break;
+        //         case '3':
+        //             $years = 5;
+        //             break;
+        //         default:
+        //             $years = 0;
+        //             break;
+        //     }
+
+        //     $end_plan = Carbon::now()->addYears(1);
+
+        //     $user->profile()->create([
+        //         'user_id' => $user->id,
+        //         'plan' => $data['plan'],
+        //         'start_plan' => Carbon::now(),
+        //         'end_plan' => Carbon::now()->addYears($years),
+        //     ]);
+
+        //     DB::commit();
+            
+        // } catch (Exception $e) {
+        //     DB::rollBack();
+        // }
+
+        // return $user;
     }
 }
