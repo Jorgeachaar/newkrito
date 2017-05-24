@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
-            $table->string('cart_paypal');
+            $table->string('payment_id');
             $table->string('name');
             $table->string('email');
             $table->string('phone')->nullable();

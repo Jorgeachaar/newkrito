@@ -30,7 +30,7 @@
 
 	@include('partials.errors')
 
-	{!!Form::open(['route'=>'cart.order', 'method'=>'POST', 'class'=>'form-horizontal'])!!}
+	{!!Form::open(['route'=>'payment', 'method'=>'POST', 'class'=>'form-horizontal'])!!}
 
 		<div class="form-group">
 			{!!Form::label('Name','Name:', array('class'=>'col-sm-2 control-label'))!!}

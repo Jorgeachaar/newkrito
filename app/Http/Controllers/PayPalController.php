@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewOrder;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\User;
 use Carbon\Carbon;
 use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -45,8 +48,14 @@ class PayPalController extends Controller
 		$this->_api_context->setConfig($paypal_conf['settings']);
 	}
 
-    public function sendPayPal()
+    public function sendPayPal(Request $request)
     {
+    	$this->validate($request, [
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+        ]);  
+
     	$payer = new Payer();
 		$payer->setPaymentMethod('paypal');
  
@@ -137,7 +146,7 @@ class PayPalController extends Controller
  
 		if (empty($payerId) || empty($token)) {
 			return \Redirect::route('index')
-				->with('message', 'Hubo un problema al intentar pagar con Paypal');
+				->with('message', 'Have a problem with Paypal, please try again later.');
 		}
  
 		$payment = Payment::get($payment_id, $this->_api_context);
@@ -149,16 +158,44 @@ class PayPalController extends Controller
  
 		if ($result->getState() == 'approved') {
  
-			// $this->saveOrder();
+			$newOrder = $this->saveOrder($payment);
+
+			Mail::to('krito.love.forever@gmail.com', 'Web KritoLove - New Order!!!')
+            ->send(new NewOrder($newOrder));
  
  			Cart::destroy();
 
 			return \Redirect::route('index')
-				->with('message', 'Compra realizada de forma correcta');
+				->with('message', 'The sale was successful!! =)');
 		}
 
 		return \Redirect::route('index')
-			->with('message', 'La compra fue cancelada');
+			->with('message', 'The sale was canceled');
+    }
+
+    function saveOrder($payment) {
+    	$user = Auth::check() ? Auth::user()->id : null;
+    	$order = Order::create([
+			'user_id' => $user,
+			'payment_id' => $payment->id,
+			'name' => 'pepe',
+			'email' => 'pepe@hotmail.com',
+			'phone' => '',
+			'address' => '',
+			'subtotal' => $payment->transactions[0]->amount->total,
+    	]);
+
+    	foreach (Cart::content() as $product) {
+			$item = new OrderItem;
+			$item->order_id = $order->id;
+			$item->product_id = $product->id;
+			$item->qty = $product->qty;
+			$item->price = $product->price;
+ 
+			$item->save();
+		}
+
+		return $order;
     }
 
     public function paymentRegister()
@@ -333,7 +370,7 @@ class PayPalController extends Controller
     {
     	$order = Order::create([
 			'user_id' => $user->id,
-			'cart_paypal' => $payment->cart,
+			'payment_id' => $payment->cart,
 			'name' => $user->name,
 			'email' => $user->email,
 			'phone' => '',

@@ -8,7 +8,7 @@ class Order extends Model
 {
 	protected $fillable = [
 		'user_id',
-		'cart_paypal',
+		'payment_id',
 		'name',
 		'email',
 		'phone',

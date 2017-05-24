@@ -13,7 +13,7 @@
                 <tr>
                   <th>id</th>
                   <th>Total</th>
-                  <th>cart_paypal</th>
+                  <th>payment_id</th>
                   <th>Options</th>                  
                 </tr>
                 </thead>
@@ -22,7 +22,7 @@
                 <tr>
                   <td>{{ $item->id }}</td>
                   <td>{{ $item->subtotal }}</td>
-                  <td>{{ $item->subtotal }}</td>
+                  <td>{{ $item->payment_id }}</td>
                   <td>
                     <a href="{{ route('orders.edit', $item->id) }}" class="btn btn-warning btn-sm pull-left"><i class="fa fa-refresh"></i> update</a>
                     <a 
@@ -48,7 +48,7 @@
                 <tr>
                   <th>id</th>
                   <th>Total</th>
-                  <th>cart_paypal</th>
+                  <th>payment_id</th>
                   <th>Options</th>
                 </tr>
                 </tfoot>
