@@ -48,13 +48,25 @@ class PayPalController extends Controller
 		$this->_api_context->setConfig($paypal_conf['settings']);
 	}
 
+	public function paymentOrder($payment_id)
+	{
+		$payment = Payment::get($payment_id, $this->_api_context);
+
+		dd($payment);
+	}
+
     public function sendPayPal(Request $request)
     {
-    	$this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-        ]);  
+    	if(!$request->user()) {
+	    	$this->validate($request, [
+	            'name' => 'required',
+	            'email' => 'required|email',
+	            'phone' => 'required',
+	        ]);
+	        Session::put('paypal_payment_name', $request->input('name'));
+	        Session::put('paypal_payment_email', $request->input('email'));
+	        Session::put('paypal_payment_phone', $request->input('phone'));
+    	}
 
     	$payer = new Payer();
 		$payer->setPaymentMethod('paypal');
@@ -92,7 +104,7 @@ class PayPalController extends Controller
 		$transaction = new Transaction();
 		$transaction->setAmount($amount)
 			->setItemList($item_list)
-			->setDescription('Pedido de prueba en mi Laravel App Store');
+			->setDescription('Krito Love Store');
  
 		$redirect_urls = new RedirectUrls();
 		$redirect_urls->setReturnUrl(\URL::route('payment.status'))
@@ -166,7 +178,7 @@ class PayPalController extends Controller
  			Cart::destroy();
 
 			return \Redirect::route('index')
-				->with('message', 'The sale was successful!! =)');
+				->with('message', 'The purchase was successful!! =)');
 		}
 
 		return \Redirect::route('index')
@@ -174,16 +186,22 @@ class PayPalController extends Controller
     }
 
     function saveOrder($payment) {
+    	
     	$user = Auth::check() ? Auth::user()->id : null;
+
     	$order = Order::create([
 			'user_id' => $user,
 			'payment_id' => $payment->id,
-			'name' => 'pepe',
-			'email' => 'pepe@hotmail.com',
-			'phone' => '',
+			'name' => Session::get('paypal_payment_name', ''),
+			'email' => Session::get('paypal_payment_email', ''),
+			'phone' => Session::get('paypal_payment_phone', ''),
 			'address' => '',
 			'subtotal' => $payment->transactions[0]->amount->total,
     	]);
+
+    	Session::forget('paypal_payment_name');
+		Session::forget('paypal_payment_email');
+		Session::forget('paypal_payment_phone');
 
     	foreach (Cart::content() as $product) {
 			$item = new OrderItem;
