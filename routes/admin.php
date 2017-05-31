@@ -26,3 +26,7 @@ Route::name('product.images.add')->get('products/{product}/images', 'Admin\Produ
 Route::name('product.images.store')->post('products/{product}/images', 'Admin\ProductController@StoreImages');
 
 Route::resource('orders', 'Admin\OrderController');
+
+Route::name('notifications')->get('notifications', 'Admin\NotificationController@index');
+Route::name('notifications.markReadAll')->get('notifications/mark_read_all', 'Admin\NotificationController@markReadAll');
+Route::name('notifications.show')->get('notifications/{notification}', 'Admin\NotificationController@show');

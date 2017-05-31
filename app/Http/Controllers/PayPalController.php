@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\NewOrder;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Notifications\NewOrder;
 use App\User;
 use Carbon\Carbon;
 use Cart;
@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
@@ -151,8 +152,6 @@ class PayPalController extends Controller
     {
 		$payment_id = Session::get('paypal_payment_id');
 
-		Session::forget('paypal_payment_id');
- 
 		$payerId = $request->input('PayerID');
 		$token = $request->input('token');
  
@@ -172,14 +171,20 @@ class PayPalController extends Controller
  
 			$newOrder = $this->saveOrder($payment);
 
-			Mail::to('krito.love.forever@gmail.com', 'Web KritoLove - New Order!!!')
-            ->send(new NewOrder($newOrder));
+			// Mail::to('krito.love.forever@gmail.com', 'Web KritoLove - New Order!!!')
+   //          ->send(new NewOrder($newOrder));
+
+            $users = User::where('role', 'admin')->get();
+            Notification::send($users, new NewOrder($newOrder));
  
  			Cart::destroy();
 
+			Session::forget('paypal_payment_id');
+			
 			return \Redirect::route('index')
 				->with('message', 'The purchase was successful!! =)');
 		}
+
 
 		return \Redirect::route('index')
 			->with('message', 'The sale was canceled');
