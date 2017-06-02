@@ -19,10 +19,10 @@
 					<h1>Cart</h1>
 				</div>
 			
+			{!!Form::open(['route'=>'payment', 'method'=>'POST', 'class'=>'form-horizontal'])!!}
 			@if (!Auth::check())
 				<div class="col-md-7">
 				@include('partials.errors')
-					{!!Form::open(['route'=>'payment', 'method'=>'POST', 'class'=>'form-horizontal'])!!}
 						<div class="page">
 							<div class="form-group">
 								{!!Form::label('Name','Name:', array('class'=>'col-sm-2 control-label'))!!}
@@ -51,7 +51,8 @@
 						</div>
 				</div>
 				<div class="col-md-5 text-center">
-					<h1>Login to account</h1>
+					<h4>ALREADY HAVE AN ACCOUNT?</h4>
+					<a href="{{ route('login.cart') }}"  class="btn btn-primary">Login</a>
 				</div>
 			@endif
 

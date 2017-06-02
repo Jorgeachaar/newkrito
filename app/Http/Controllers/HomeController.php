@@ -79,4 +79,9 @@ class HomeController extends Controller
             
         }
     }
+
+    public function loginCart()
+    {
+        return redirect()->intended(route('cart.detail'));
+    }
 }

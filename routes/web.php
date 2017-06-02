@@ -19,6 +19,7 @@ Route::name('renewplan')->get('renewplan', 'ReNewPlanController@index')->middlew
 Route::name('renewplan')->post('renewplan', 'ReNewPlanController@store')->middleware('auth');
 
 Auth::routes();
+Route::name('login.cart')->get('login/cart', 'HomeController@loginCart')->middleware('auth');
 
 Route::name('posts.list')->get('blog', 'PostController@lists');
 Route::name('posts.show')->get('blog/{post}-{slug}', 'PostController@show');
