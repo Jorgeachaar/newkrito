@@ -19,41 +19,41 @@
 					<h1>Cart</h1>
 				</div>
 			
-			<div class="col-md-7">
-			@include('partials.errors')
-				{!!Form::open(['route'=>'payment', 'method'=>'POST', 'class'=>'form-horizontal'])!!}
-					<div class="page">
-					@if (!Auth::check())
-						<div class="form-group">
-							{!!Form::label('Name','Name:', array('class'=>'col-sm-2 control-label'))!!}
-							<div class="col-sm-10">
-							{!!	Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'']) !!}
+			@if (!Auth::check())
+				<div class="col-md-7">
+				@include('partials.errors')
+					{!!Form::open(['route'=>'payment', 'method'=>'POST', 'class'=>'form-horizontal'])!!}
+						<div class="page">
+							<div class="form-group">
+								{!!Form::label('Name','Name:', array('class'=>'col-sm-2 control-label'))!!}
+								<div class="col-sm-10">
+								{!!	Form::text('name', null, ['class'=>'form-control', 'placeholder'=>'']) !!}
+								</div>
+							</div>
+							<div class="form-group">
+								{!!Form::label('Email','Email:', array('class'=>'col-sm-2 control-label'))!!}
+								<div class="col-sm-10">
+								{!!	Form::email('email', null, ['class'=>'form-control', 'placeholder'=>'']) !!}
+								</div>
+							</div>
+							<div class="form-group">
+								{!!Form::label('Adress','Adress:', array('class'=>'col-sm-2 control-label'))!!}
+								<div class="col-sm-10">
+								{!!	Form::text('address', null, ['class'=>'form-control', 'placeholder'=>'']) !!}
+								</div>
+							</div>
+							<div class="form-group">
+								{!!Form::label('Phone','Phone:', array('class'=>'col-sm-2 control-label'))!!}
+								<div class="col-sm-10">
+								{!!	Form::text('phone', null, ['class'=>'form-control', 'placeholder'=>'']) !!}
+								</div>
 							</div>
 						</div>
-						<div class="form-group">
-							{!!Form::label('Email','Email:', array('class'=>'col-sm-2 control-label'))!!}
-							<div class="col-sm-10">
-							{!!	Form::email('email', null, ['class'=>'form-control', 'placeholder'=>'']) !!}
-							</div>
-						</div>
-						<div class="form-group">
-							{!!Form::label('Adress','Adress:', array('class'=>'col-sm-2 control-label'))!!}
-							<div class="col-sm-10">
-							{!!	Form::text('address', null, ['class'=>'form-control', 'placeholder'=>'']) !!}
-							</div>
-						</div>
-						<div class="form-group">
-							{!!Form::label('Phone','Phone:', array('class'=>'col-sm-2 control-label'))!!}
-							<div class="col-sm-10">
-							{!!	Form::text('phone', null, ['class'=>'form-control', 'placeholder'=>'']) !!}
-							</div>
-						</div>
-					@endif
-					</div>
-			</div>
-			<div class="col-md-5 text-center">
-				<h1>Logueate wachin!</h1>
-			</div>
+				</div>
+				<div class="col-md-5 text-center">
+					<h1>Login to account</h1>
+				</div>
+			@endif
 
 
 		<div class="row">
