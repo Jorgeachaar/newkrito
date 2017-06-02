@@ -38,9 +38,10 @@ class User extends Authenticatable
             {
                 $profile = $this->profile;
                 $end_plan = $profile->end_plan;
-                $now = Carbon::now();
-
-                return $now <= $end_plan;
+                if($end_plan) {
+                    $now = Carbon::now();
+                    return $now <= $end_plan;
+                }
             }
             return false;                
         }   

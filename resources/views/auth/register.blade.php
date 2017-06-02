@@ -64,8 +64,12 @@
                             <div class="form-group">
                                 <label for="result" class="col-md-4 control-label">Plan</label>
                                 <div class="col-md-6 pull-left radio-button-panel">
+                                     <p>
+                                        {{ Form::radio('plan', '0' , true, ['id' => 'planFree']) }}
+                                        <label for="planFree">Free</label> 
+                                    </p>
                                     <p>
-                                        {{ Form::radio('plan', '1' , true, ['id' => 'plan1']) }}
+                                        {{ Form::radio('plan', '1' , false, ['id' => 'plan1']) }}
                                         <label for="plan1">1 Year $25</label> 
                                     </p>
                                     <p>
