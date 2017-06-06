@@ -1,10 +1,10 @@
 <?php
 // Route::get('/home', 'HomeController@index');
 
+Route::name('index')->get('/', 'HomeController@index');
+
 Route::get('/imagenes', 'ImageController@index');
 Route::post('/imagenes', 'ImageController@store2')->name('image');
-
-Route::name('index')->get('/', 'HomeController@index');
 
 Route::name('contact')->post('/', 'HomeController@sendContact');
 
@@ -34,6 +34,7 @@ Route::name('cart.delete')->get('cart/delete/{id}', 'CartController@delete');
 Route::name('cart.trash')->get('cart/trash', 'CartController@trash');
 Route::name('cart.update')->post('cart/update/{id}', 'CartController@update');
 Route::name('cart.detail')->get('cart/detail', 'CartController@detail');
+
 
 Route::name('payment.register')->get('payment/register', 'PayPalController@paymentRegister');
 Route::name('payment.register.status')->get('payment/register/status', 'PayPalController@paymentRegisterStatus');

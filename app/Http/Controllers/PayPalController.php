@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Notifications\NewOrder;
+use App\Services\PayPalService;
 use App\User;
 use Carbon\Carbon;
 use Cart;
@@ -43,7 +44,6 @@ class PayPalController extends Controller
 
 	public function __construct()
 	{
-		// setup PayPal api context
 		$paypal_conf = \Config::get('paypal');
 		$this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
 		$this->_api_context->setConfig($paypal_conf['settings']);
@@ -51,6 +51,9 @@ class PayPalController extends Controller
 
 	public function paymentOrder($payment_id)
 	{
+		$paypalsrv = new PayPalService;
+		dd($paypalsrv->getString());
+
 		$payment = Payment::get($payment_id, $this->_api_context);
 
 		dd($payment);
@@ -58,19 +61,27 @@ class PayPalController extends Controller
 
     public function sendPayPal(Request $request)
     {
+    	$payer = new Payer();
+		$payer->setPaymentMethod('paypal');
+    	
     	if(!$request->user()) {
 	    	$this->validate($request, [
 	            'name' => 'required',
 	            'email' => 'required|email',
 	            'phone' => 'required',
 	        ]);
-	        Session::put('paypal_payment_name', $request->input('name'));
-	        Session::put('paypal_payment_email', $request->input('email'));
-	        Session::put('paypal_payment_phone', $request->input('phone'));
+	        
+			$payer->setEmail($request->input('email'));
+			$payer->setFirstName($request->input('name'));
+			$payer->setLastName($request->input('name'));
+			$payer->setphone($request->input('phone'));
+    	} else {
+			$payer->setExternalRememberMeId($request->user()->id);
+			$payer->setEmail($request->user()->email);			
+			$payer->setFirstName($request->user()->name);
+			$payer->setLastName($request->user()->name);
+			//$payer->setphone($request->input('phone'));    		
     	}
-
-    	$payer = new Payer();
-		$payer->setPaymentMethod('paypal');
  
 		$items = array();
 		$subtotal = 0;
@@ -136,7 +147,6 @@ class PayPalController extends Controller
 			}
 		}
  
-		// add payment ID to session
 		Session::put('paypal_payment_id', $payment->getId());
  
 		if(isset($redirect_url)) {
@@ -195,18 +205,14 @@ class PayPalController extends Controller
     	$user = Auth::check() ? Auth::user()->id : null;
 
     	$order = Order::create([
-			'user_id' => $user,
+			'user_id' => $payment->getPayer()->getExternalRememberMeId(),
 			'payment_id' => $payment->id,
-			'name' => Session::get('paypal_payment_name', ''),
-			'email' => Session::get('paypal_payment_email', ''),
+			'name' => $payment->getPayer()->getFirstName(),
+			'email' => $payment->getPayer()->getEmail(),
 			'phone' => Session::get('paypal_payment_phone', ''),
 			'address' => '',
 			'subtotal' => $payment->transactions[0]->amount->total,
-    	]);
-
-    	Session::forget('paypal_payment_name');
-		Session::forget('paypal_payment_email');
-		Session::forget('paypal_payment_phone');
+    	]);	
 
     	foreach (Cart::content() as $product) {
 			$item = new OrderItem;

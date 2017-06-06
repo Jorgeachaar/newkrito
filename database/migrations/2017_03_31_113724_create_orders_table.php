@@ -23,7 +23,7 @@ class CreateOrdersTable extends Migration
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->float('subtotal', 8, 2);
-            $table->enum('status', ['new', 'old'])->default('new');
+            $table->enum('status', ['created', 'approved', 'failed'])->default('created');
             $table->timestamps();
 
             $table->foreign('user_id')
